@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.kd.system.mapper.DataFluidBalanceMapper">
+    
+    <resultMap type="DataFluidBalance" id="DataFluidBalanceResult">
+        <result property="Id"    column="Id"    />
+        <result property="encounterId"    column="encounterId"    />
+        <result property="hospitalId"    column="hospitalId"    />
+        <result property="chartTime"    column="chartTime"    />
+        <result property="urineOutput"    column="urineOutput"    />
+        <result property="inputPerHour"    column="inputPerHour"    />
+        <result property="outputPerHour"    column="outputPerHour"    />
+        <result property="balancePerHour"    column="balancePerHour"    />
+        <result property="gastrointestinalInputTotal"    column="gastrointestinalInputTotal"    />
+        <result property="stoolTotal"    column="stoolTotal"    />
+        <result property="gastrointestinalOutputTotal"    column="gastrointestinalOutputTotal"    />
+        <result property="drainageTotal"    column="drainageTotal"    />
+        <result property="actualUltrafiltration"    column="actualUltrafiltration"    />
+        <result property="bloodProductsTotal"    column="bloodProductsTotal"    />
+        <result property="Instructions"    column="Instructions"    />
+    </resultMap>
+
+    <sql id="selectDataFluidBalanceVo">
+        select Id, encounterId, hospitalId, chartTime, urineOutput, inputPerHour, outputPerHour, balancePerHour, gastrointestinalInputTotal, stoolTotal, gastrointestinalOutputTotal, drainageTotal, actualUltrafiltration, bloodProductsTotal, Instructions from data_fluid_balance
+    </sql>
+
+    <select id="selectDataFluidBalanceList" parameterType="DataFluidBalance" resultMap="DataFluidBalanceResult">
+        <include refid="selectDataFluidBalanceVo"/>
+        <where>  
+            <if test="encounterId != null "> and encounterId = #{encounterId}</if>
+            <if test="hospitalId != null "> and hospitalId = #{hospitalId}</if>
+            <if test="params.beginChartTime != null and params.beginChartTime != '' and params.endChartTime != null and params.endChartTime != ''"> and chartTime between #{params.beginChartTime} and #{params.endChartTime}</if>
+            <if test="urineOutput != null "> and urineOutput = #{urineOutput}</if>
+            <if test="inputPerHour != null "> and inputPerHour = #{inputPerHour}</if>
+            <if test="outputPerHour != null "> and outputPerHour = #{outputPerHour}</if>
+            <if test="balancePerHour != null "> and balancePerHour = #{balancePerHour}</if>
+            <if test="gastrointestinalInputTotal != null "> and gastrointestinalInputTotal = #{gastrointestinalInputTotal}</if>
+            <if test="stoolTotal != null "> and stoolTotal = #{stoolTotal}</if>
+            <if test="gastrointestinalOutputTotal != null "> and gastrointestinalOutputTotal = #{gastrointestinalOutputTotal}</if>
+            <if test="drainageTotal != null "> and drainageTotal = #{drainageTotal}</if>
+            <if test="actualUltrafiltration != null "> and actualUltrafiltration = #{actualUltrafiltration}</if>
+            <if test="bloodProductsTotal != null "> and bloodProductsTotal = #{bloodProductsTotal}</if>
+            <if test="Instructions != null  and Instructions != ''"> and Instructions like concat('%', #{Instructions}, '%')</if>
+        </where>
+    </select>
+    
+    <select id="selectDataFluidBalanceById" parameterType="Long" resultMap="DataFluidBalanceResult">
+        <include refid="selectDataFluidBalanceVo"/>
+        where Id = #{Id}
+    </select>
+
+    <insert id="insertDataFluidBalance" parameterType="DataFluidBalance" useGeneratedKeys="true" keyProperty="Id">
+        insert into data_fluid_balance
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="encounterId != null">encounterId,</if>
+            <if test="hospitalId != null">hospitalId,</if>
+            <if test="chartTime != null">chartTime,</if>
+            <if test="urineOutput != null">urineOutput,</if>
+            <if test="inputPerHour != null">inputPerHour,</if>
+            <if test="outputPerHour != null">outputPerHour,</if>
+            <if test="balancePerHour != null">balancePerHour,</if>
+            <if test="gastrointestinalInputTotal != null">gastrointestinalInputTotal,</if>
+            <if test="stoolTotal != null">stoolTotal,</if>
+            <if test="gastrointestinalOutputTotal != null">gastrointestinalOutputTotal,</if>
+            <if test="drainageTotal != null">drainageTotal,</if>
+            <if test="actualUltrafiltration != null">actualUltrafiltration,</if>
+            <if test="bloodProductsTotal != null">bloodProductsTotal,</if>
+            <if test="Instructions != null">Instructions,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="encounterId != null">#{encounterId},</if>
+            <if test="hospitalId != null">#{hospitalId},</if>
+            <if test="chartTime != null">#{chartTime},</if>
+            <if test="urineOutput != null">#{urineOutput},</if>
+            <if test="inputPerHour != null">#{inputPerHour},</if>
+            <if test="outputPerHour != null">#{outputPerHour},</if>
+            <if test="balancePerHour != null">#{balancePerHour},</if>
+            <if test="gastrointestinalInputTotal != null">#{gastrointestinalInputTotal},</if>
+            <if test="stoolTotal != null">#{stoolTotal},</if>
+            <if test="gastrointestinalOutputTotal != null">#{gastrointestinalOutputTotal},</if>
+            <if test="drainageTotal != null">#{drainageTotal},</if>
+            <if test="actualUltrafiltration != null">#{actualUltrafiltration},</if>
+            <if test="bloodProductsTotal != null">#{bloodProductsTotal},</if>
+            <if test="Instructions != null">#{Instructions},</if>
+         </trim>
+    </insert>
+
+    <update id="updateDataFluidBalance" parameterType="DataFluidBalance">
+        update data_fluid_balance
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="encounterId != null">encounterId = #{encounterId},</if>
+            <if test="hospitalId != null">hospitalId = #{hospitalId},</if>
+            <if test="chartTime != null">chartTime = #{chartTime},</if>
+            <if test="urineOutput != null">urineOutput = #{urineOutput},</if>
+            <if test="inputPerHour != null">inputPerHour = #{inputPerHour},</if>
+            <if test="outputPerHour != null">outputPerHour = #{outputPerHour},</if>
+            <if test="balancePerHour != null">balancePerHour = #{balancePerHour},</if>
+            <if test="gastrointestinalInputTotal != null">gastrointestinalInputTotal = #{gastrointestinalInputTotal},</if>
+            <if test="stoolTotal != null">stoolTotal = #{stoolTotal},</if>
+            <if test="gastrointestinalOutputTotal != null">gastrointestinalOutputTotal = #{gastrointestinalOutputTotal},</if>
+            <if test="drainageTotal != null">drainageTotal = #{drainageTotal},</if>
+            <if test="actualUltrafiltration != null">actualUltrafiltration = #{actualUltrafiltration},</if>
+            <if test="bloodProductsTotal != null">bloodProductsTotal = #{bloodProductsTotal},</if>
+            <if test="Instructions != null">Instructions = #{Instructions},</if>
+        </trim>
+        where Id = #{Id}
+    </update>
+
+    <delete id="deleteDataFluidBalanceById" parameterType="Long">
+        delete from data_fluid_balance where Id = #{Id}
+    </delete>
+
+    <delete id="deleteDataFluidBalanceByIds" parameterType="String">
+        delete from data_fluid_balance where Id in 
+        <foreach item="Id" collection="array" open="(" separator="," close=")">
+            #{Id}
+        </foreach>
+    </delete>
+
+    <!-- 根据病例编号查询 -->
+    <select id="selectDataFluidBalanceByEncounterId" parameterType="Long" resultType="com.kd.system.domain.DataFluidBalance">
+        SELECT *
+        FROM data_fluid_balance
+        WHERE encounterId = #{encounterId}
+    </select>
+
+</mapper>

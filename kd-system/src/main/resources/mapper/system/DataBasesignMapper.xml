@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.kd.system.mapper.DataBasesignMapper">
+    
+    <resultMap type="DataBasesign" id="DataBasesignResult">
+        <result property="Id"    column="Id"    />
+        <result property="idcard"    column="idcard"    />
+        <result property="name"    column="name"    />
+        <result property="hospitalId"    column="hospitalId"    />
+        <result property="chartTime"    column="chartTime"    />
+        <result property="age"    column="age"    />
+        <result property="dateOfBirth"    column="dateOfBirth"    />
+        <result property="heightCm"    column="heightCm"    />
+        <result property="weightKg"    column="weightKg"    />
+        <result property="gender"    column="gender"    />
+        <result property="admissionDiagnosis"    column="admissionDiagnosis"    />
+        <result property="departmentAdmissionTime"    column="departmentAdmissionTime"    />
+        <result property="departmentDischargeTime"    column="departmentDischargeTime"    />
+        <result property="dischargeOutcome"    column="dischargeOutcome"    />
+        <result property="timeOfDeath"    column="timeOfDeath"    />
+    </resultMap>
+
+    <sql id="selectDataBasesignVo">
+        select Id, idcard, name, hospitalId, chartTime, age, dateOfBirth, heightCm, weightKg, gender, admissionDiagnosis, departmentAdmissionTime, departmentDischargeTime, dischargeOutcome, timeOfDeath from data_basesign
+    </sql>
+
+    <select id="selectDataBasesignList" parameterType="DataBasesign" resultMap="DataBasesignResult">
+        <include refid="selectDataBasesignVo"/>
+        <where>  
+            <if test="Id != null "> and Id = #{Id}</if>
+            <if test="idcard != null "> and idcard = #{idcard}</if>
+            <if test="name != null  and name != ''"> and name like concat('%', #{name}, '%')</if>
+            <if test="hospitalId != null  and hospitalId != ''"> and hospitalId = #{hospitalId}</if>
+            <if test="params.beginChartTime != null and params.beginChartTime != '' and params.endChartTime != null and params.endChartTime != ''"> and chartTime between #{params.beginChartTime} and #{params.endChartTime}</if>
+            <if test="params.beginAge != null and params.beginAge != '' and params.endAge != null and params.endAge != ''"> and age between #{params.beginAge} and #{params.endAge}</if>
+            <if test="params.beginDateOfBirth != null and params.beginDateOfBirth != '' and params.endDateOfBirth != null and params.endDateOfBirth != ''"> and dateOfBirth between #{params.beginDateOfBirth} and #{params.endDateOfBirth}</if>
+            <if test="params.beginHeightCm != null and params.beginHeightCm != '' and params.endHeightCm != null and params.endHeightCm != ''"> and heightCm between #{params.beginHeightCm} and #{params.endHeightCm}</if>
+            <if test="params.beginWeightKg != null and params.beginWeightKg != '' and params.endWeightKg != null and params.endWeightKg != ''"> and weightKg between #{params.beginWeightKg} and #{params.endWeightKg}</if>
+            <if test="gender != null  and gender != ''"> and gender = #{gender}</if>
+            <if test="admissionDiagnosis != null  and admissionDiagnosis != ''"> and admissionDiagnosis like concat('%', #{admissionDiagnosis}, '%')</if>
+            <if test="params.beginDepartmentAdmissionTime != null and params.beginDepartmentAdmissionTime != '' and params.endDepartmentAdmissionTime != null and params.endDepartmentAdmissionTime != ''"> and departmentAdmissionTime between #{params.beginDepartmentAdmissionTime} and #{params.endDepartmentAdmissionTime}</if>
+            <if test="params.beginDepartmentDischargeTime != null and params.beginDepartmentDischargeTime != '' and params.endDepartmentDischargeTime != null and params.endDepartmentDischargeTime != ''"> and departmentDischargeTime between #{params.beginDepartmentDischargeTime} and #{params.endDepartmentDischargeTime}</if>
+            <if test="dischargeOutcome != null  and dischargeOutcome != ''"> and dischargeOutcome like concat('%', #{dischargeOutcome}, '%')</if>
+            <if test="params.beginTimeOfDeath != null and params.beginTimeOfDeath != '' and params.endTimeOfDeath != null and params.endTimeOfDeath != ''"> and timeOfDeath between #{params.beginTimeOfDeath} and #{params.endTimeOfDeath}</if>
+        </where>
+    </select>
+    
+    <select id="selectDataBasesignById" parameterType="Long" resultMap="DataBasesignResult">
+        <include refid="selectDataBasesignVo"/>
+        where Id = #{Id}
+    </select>
+
+    <insert id="insertDataBasesign" parameterType="DataBasesign" useGeneratedKeys="true" keyProperty="Id">
+        insert into data_basesign
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="idcard != null">idcard,</if>
+            <if test="name != null and name != ''">name,</if>
+            <if test="hospitalId != null">hospitalId,</if>
+            <if test="chartTime != null">chartTime,</if>
+            <if test="age != null">age,</if>
+            <if test="dateOfBirth != null">dateOfBirth,</if>
+            <if test="heightCm != null">heightCm,</if>
+            <if test="weightKg != null">weightKg,</if>
+            <if test="gender != null">gender,</if>
+            <if test="admissionDiagnosis != null">admissionDiagnosis,</if>
+            <if test="departmentAdmissionTime != null">departmentAdmissionTime,</if>
+            <if test="departmentDischargeTime != null">departmentDischargeTime,</if>
+            <if test="dischargeOutcome != null">dischargeOutcome,</if>
+            <if test="timeOfDeath != null">timeOfDeath,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="idcard != null">#{idcard},</if>
+            <if test="name != null and name != ''">#{name},</if>
+            <if test="hospitalId != null">#{hospitalId},</if>
+            <if test="chartTime != null">#{chartTime},</if>
+            <if test="age != null">#{age},</if>
+            <if test="dateOfBirth != null">#{dateOfBirth},</if>
+            <if test="heightCm != null">#{heightCm},</if>
+            <if test="weightKg != null">#{weightKg},</if>
+            <if test="gender != null">#{gender},</if>
+            <if test="admissionDiagnosis != null">#{admissionDiagnosis},</if>
+            <if test="departmentAdmissionTime != null">#{departmentAdmissionTime},</if>
+            <if test="departmentDischargeTime != null">#{departmentDischargeTime},</if>
+            <if test="dischargeOutcome != null">#{dischargeOutcome},</if>
+            <if test="timeOfDeath != null">#{timeOfDeath},</if>
+         </trim>
+    </insert>
+
+    <update id="updateDataBasesign" parameterType="DataBasesign">
+        update data_basesign
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="idcard != null">idcard = #{idcard},</if>
+            <if test="name != null and name != ''">name = #{name},</if>
+            <if test="hospitalId != null">hospitalId = #{hospitalId},</if>
+            <if test="chartTime != null">chartTime = #{chartTime},</if>
+            <if test="age != null">age = #{age},</if>
+            <if test="dateOfBirth != null">dateOfBirth = #{dateOfBirth},</if>
+            <if test="heightCm != null">heightCm = #{heightCm},</if>
+            <if test="weightKg != null">weightKg = #{weightKg},</if>
+            <if test="gender != null">gender = #{gender},</if>
+            <if test="admissionDiagnosis != null">admissionDiagnosis = #{admissionDiagnosis},</if>
+            <if test="departmentAdmissionTime != null">departmentAdmissionTime = #{departmentAdmissionTime},</if>
+            <if test="departmentDischargeTime != null">departmentDischargeTime = #{departmentDischargeTime},</if>
+            <if test="dischargeOutcome != null">dischargeOutcome = #{dischargeOutcome},</if>
+            <if test="timeOfDeath != null">timeOfDeath = #{timeOfDeath},</if>
+        </trim>
+        where Id = #{Id}
+    </update>
+
+    <delete id="deleteDataBasesignById" parameterType="Long">
+        delete from data_basesign where Id = #{Id}
+    </delete>
+
+    <delete id="deleteDataBasesignByIds" parameterType="String">
+        delete from data_basesign where Id in 
+        <foreach item="Id" collection="array" open="(" separator="," close=")">
+            #{Id}
+        </foreach>
+    </delete>
+</mapper>

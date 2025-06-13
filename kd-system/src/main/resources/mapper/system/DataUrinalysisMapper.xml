@@ -1,0 +1,224 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.kd.system.mapper.DataUrinalysisMapper">
+    
+    <resultMap type="DataUrinalysis" id="DataUrinalysisResult">
+        <result property="Id"    column="Id"    />
+        <result property="encounterId"    column="encounterId"    />
+        <result property="hospitalId"    column="hospitalId"    />
+        <result property="chartTime"    column="chartTime"    />
+        <result property="urinePH"    column="urinePH"    />
+        <result property="urineRBC"    column="urineRBC"    />
+        <result property="urineWBC"    column="urineWBC"    />
+        <result property="urineSpecificGravity"    column="urineSpecificGravity"    />
+        <result property="urineUrate"    column="urineUrate"    />
+        <result property="urineAmylase"    column="urineAmylase"    />
+        <result property="hyalineCasts"    column="hyalineCasts"    />
+        <result property="pathologicalCasts"    column="pathologicalCasts"    />
+        <result property="urateCrystals"    column="urateCrystals"    />
+        <result property="calciumOxalateCrystals"    column="calciumOxalateCrystals"    />
+        <result property="uricAcidCrystals"    column="uricAcidCrystals"    />
+        <result property="squamousEpithelialCells"    column="squamousEpithelialCells"    />
+        <result property="magnesiumAmmoniumPhosphateCrystals"    column="magnesiumAmmoniumPhosphateCrystals"    />
+        <result property="vitaminC"    column="vitaminC"    />
+        <result property="leukocyteClusters"    column="leukocyteClusters"    />
+        <result property="mucusThreads"    column="mucusThreads"    />
+        <result property="yeast"    column="yeast"    />
+        <result property="bacilli"    column="bacilli"    />
+        <result property="rbcHPF"    column="rbcHPF"    />
+        <result property="nonSquamousEpithelialCells"    column="nonSquamousEpithelialCells"    />
+        <result property="spermatozoa"    column="spermatozoa"    />
+        <result property="squamousEpithelialCellsHPF"    column="squamousEpithelialCellsHPF"    />
+        <result property="suspectedCocci"    column="suspectedCocci"    />
+        <result property="wbcHPF"    column="wbcHPF"    />
+        <result property="bacteria"    column="bacteria"    />
+        <result property="cocci"    column="cocci"    />
+        <result property="phosphateCrystals"    column="phosphateCrystals"    />
+        <result property="monohydrateCalciumOxalateCrystals"    column="monohydrateCalciumOxalateCrystals"    />
+        <result property="dihydrateCalciumOxalateCrystals"    column="dihydrateCalciumOxalateCrystals"    />
+        <result property="Instructions"    column="Instructions"    />
+    </resultMap>
+
+    <sql id="selectDataUrinalysisVo">
+        select Id, encounterId, hospitalId, chartTime, urinePH, urineRBC, urineWBC, urineSpecificGravity, urineUrate, urineAmylase, hyalineCasts, pathologicalCasts, urateCrystals, calciumOxalateCrystals, uricAcidCrystals, squamousEpithelialCells, magnesiumAmmoniumPhosphateCrystals, vitaminC, leukocyteClusters, mucusThreads, yeast, bacilli, rbcHPF, nonSquamousEpithelialCells, spermatozoa, squamousEpithelialCellsHPF, suspectedCocci, wbcHPF, bacteria, cocci, phosphateCrystals, monohydrateCalciumOxalateCrystals, dihydrateCalciumOxalateCrystals, Instructions from data_urinalysis
+    </sql>
+
+    <select id="selectDataUrinalysisList" parameterType="DataUrinalysis" resultMap="DataUrinalysisResult">
+        <include refid="selectDataUrinalysisVo"/>
+        <where>  
+            <if test="encounterId != null "> and encounterId = #{encounterId}</if>
+            <if test="hospitalId != null "> and hospitalId = #{hospitalId}</if>
+            <if test="params.beginChartTime != null and params.beginChartTime != '' and params.endChartTime != null and params.endChartTime != ''"> and chartTime between #{params.beginChartTime} and #{params.endChartTime}</if>
+            <if test="urinePH != null "> and urinePH = #{urinePH}</if>
+            <if test="urineRBC != null "> and urineRBC = #{urineRBC}</if>
+            <if test="urineWBC != null "> and urineWBC = #{urineWBC}</if>
+            <if test="urineSpecificGravity != null "> and urineSpecificGravity = #{urineSpecificGravity}</if>
+            <if test="urineUrate != null  and urineUrate != ''"> and urineUrate = #{urineUrate}</if>
+            <if test="urineAmylase != null  and urineAmylase != ''"> and urineAmylase = #{urineAmylase}</if>
+            <if test="hyalineCasts != null  and hyalineCasts != ''"> and hyalineCasts = #{hyalineCasts}</if>
+            <if test="pathologicalCasts != null  and pathologicalCasts != ''"> and pathologicalCasts = #{pathologicalCasts}</if>
+            <if test="urateCrystals != null  and urateCrystals != ''"> and urateCrystals = #{urateCrystals}</if>
+            <if test="calciumOxalateCrystals != null  and calciumOxalateCrystals != ''"> and calciumOxalateCrystals = #{calciumOxalateCrystals}</if>
+            <if test="uricAcidCrystals != null  and uricAcidCrystals != ''"> and uricAcidCrystals = #{uricAcidCrystals}</if>
+            <if test="squamousEpithelialCells != null "> and squamousEpithelialCells = #{squamousEpithelialCells}</if>
+            <if test="magnesiumAmmoniumPhosphateCrystals != null  and magnesiumAmmoniumPhosphateCrystals != ''"> and magnesiumAmmoniumPhosphateCrystals = #{magnesiumAmmoniumPhosphateCrystals}</if>
+            <if test="vitaminC != null  and vitaminC != ''"> and vitaminC = #{vitaminC}</if>
+            <if test="leukocyteClusters != null  and leukocyteClusters != ''"> and leukocyteClusters = #{leukocyteClusters}</if>
+            <if test="mucusThreads != null  and mucusThreads != ''"> and mucusThreads = #{mucusThreads}</if>
+            <if test="yeast != null  and yeast != ''"> and yeast = #{yeast}</if>
+            <if test="bacilli != null  and bacilli != ''"> and bacilli = #{bacilli}</if>
+            <if test="rbcHPF != null "> and rbcHPF = #{rbcHPF}</if>
+            <if test="nonSquamousEpithelialCells != null "> and nonSquamousEpithelialCells = #{nonSquamousEpithelialCells}</if>
+            <if test="spermatozoa != null  and spermatozoa != ''"> and spermatozoa = #{spermatozoa}</if>
+            <if test="squamousEpithelialCellsHPF != null "> and squamousEpithelialCellsHPF = #{squamousEpithelialCellsHPF}</if>
+            <if test="suspectedCocci != null  and suspectedCocci != ''"> and suspectedCocci = #{suspectedCocci}</if>
+            <if test="wbcHPF != null "> and wbcHPF = #{wbcHPF}</if>
+            <if test="bacteria != null  and bacteria != ''"> and bacteria = #{bacteria}</if>
+            <if test="cocci != null  and cocci != ''"> and cocci = #{cocci}</if>
+            <if test="phosphateCrystals != null  and phosphateCrystals != ''"> and phosphateCrystals = #{phosphateCrystals}</if>
+            <if test="monohydrateCalciumOxalateCrystals != null  and monohydrateCalciumOxalateCrystals != ''"> and monohydrateCalciumOxalateCrystals = #{monohydrateCalciumOxalateCrystals}</if>
+            <if test="dihydrateCalciumOxalateCrystals != null  and dihydrateCalciumOxalateCrystals != ''"> and dihydrateCalciumOxalateCrystals = #{dihydrateCalciumOxalateCrystals}</if>
+            <if test="Instructions != null  and Instructions != ''"> and Instructions like concat('%', #{Instructions}, '%')</if>
+        </where>
+    </select>
+    
+    <select id="selectDataUrinalysisById" parameterType="Long" resultMap="DataUrinalysisResult">
+        <include refid="selectDataUrinalysisVo"/>
+        where Id = #{Id}
+    </select>
+
+    <insert id="insertDataUrinalysis" parameterType="DataUrinalysis" useGeneratedKeys="true" keyProperty="Id">
+        insert into data_urinalysis
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="encounterId != null">encounterId,</if>
+            <if test="hospitalId != null">hospitalId,</if>
+            <if test="chartTime != null">chartTime,</if>
+            <if test="urinePH != null">urinePH,</if>
+            <if test="urineRBC != null">urineRBC,</if>
+            <if test="urineWBC != null">urineWBC,</if>
+            <if test="urineSpecificGravity != null">urineSpecificGravity,</if>
+            <if test="urineUrate != null">urineUrate,</if>
+            <if test="urineAmylase != null">urineAmylase,</if>
+            <if test="hyalineCasts != null">hyalineCasts,</if>
+            <if test="pathologicalCasts != null">pathologicalCasts,</if>
+            <if test="urateCrystals != null">urateCrystals,</if>
+            <if test="calciumOxalateCrystals != null">calciumOxalateCrystals,</if>
+            <if test="uricAcidCrystals != null">uricAcidCrystals,</if>
+            <if test="squamousEpithelialCells != null">squamousEpithelialCells,</if>
+            <if test="magnesiumAmmoniumPhosphateCrystals != null">magnesiumAmmoniumPhosphateCrystals,</if>
+            <if test="vitaminC != null">vitaminC,</if>
+            <if test="leukocyteClusters != null">leukocyteClusters,</if>
+            <if test="mucusThreads != null">mucusThreads,</if>
+            <if test="yeast != null">yeast,</if>
+            <if test="bacilli != null">bacilli,</if>
+            <if test="rbcHPF != null">rbcHPF,</if>
+            <if test="nonSquamousEpithelialCells != null">nonSquamousEpithelialCells,</if>
+            <if test="spermatozoa != null">spermatozoa,</if>
+            <if test="squamousEpithelialCellsHPF != null">squamousEpithelialCellsHPF,</if>
+            <if test="suspectedCocci != null">suspectedCocci,</if>
+            <if test="wbcHPF != null">wbcHPF,</if>
+            <if test="bacteria != null">bacteria,</if>
+            <if test="cocci != null">cocci,</if>
+            <if test="phosphateCrystals != null">phosphateCrystals,</if>
+            <if test="monohydrateCalciumOxalateCrystals != null">monohydrateCalciumOxalateCrystals,</if>
+            <if test="dihydrateCalciumOxalateCrystals != null">dihydrateCalciumOxalateCrystals,</if>
+            <if test="Instructions != null">Instructions,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="encounterId != null">#{encounterId},</if>
+            <if test="hospitalId != null">#{hospitalId},</if>
+            <if test="chartTime != null">#{chartTime},</if>
+            <if test="urinePH != null">#{urinePH},</if>
+            <if test="urineRBC != null">#{urineRBC},</if>
+            <if test="urineWBC != null">#{urineWBC},</if>
+            <if test="urineSpecificGravity != null">#{urineSpecificGravity},</if>
+            <if test="urineUrate != null">#{urineUrate},</if>
+            <if test="urineAmylase != null">#{urineAmylase},</if>
+            <if test="hyalineCasts != null">#{hyalineCasts},</if>
+            <if test="pathologicalCasts != null">#{pathologicalCasts},</if>
+            <if test="urateCrystals != null">#{urateCrystals},</if>
+            <if test="calciumOxalateCrystals != null">#{calciumOxalateCrystals},</if>
+            <if test="uricAcidCrystals != null">#{uricAcidCrystals},</if>
+            <if test="squamousEpithelialCells != null">#{squamousEpithelialCells},</if>
+            <if test="magnesiumAmmoniumPhosphateCrystals != null">#{magnesiumAmmoniumPhosphateCrystals},</if>
+            <if test="vitaminC != null">#{vitaminC},</if>
+            <if test="leukocyteClusters != null">#{leukocyteClusters},</if>
+            <if test="mucusThreads != null">#{mucusThreads},</if>
+            <if test="yeast != null">#{yeast},</if>
+            <if test="bacilli != null">#{bacilli},</if>
+            <if test="rbcHPF != null">#{rbcHPF},</if>
+            <if test="nonSquamousEpithelialCells != null">#{nonSquamousEpithelialCells},</if>
+            <if test="spermatozoa != null">#{spermatozoa},</if>
+            <if test="squamousEpithelialCellsHPF != null">#{squamousEpithelialCellsHPF},</if>
+            <if test="suspectedCocci != null">#{suspectedCocci},</if>
+            <if test="wbcHPF != null">#{wbcHPF},</if>
+            <if test="bacteria != null">#{bacteria},</if>
+            <if test="cocci != null">#{cocci},</if>
+            <if test="phosphateCrystals != null">#{phosphateCrystals},</if>
+            <if test="monohydrateCalciumOxalateCrystals != null">#{monohydrateCalciumOxalateCrystals},</if>
+            <if test="dihydrateCalciumOxalateCrystals != null">#{dihydrateCalciumOxalateCrystals},</if>
+            <if test="Instructions != null">#{Instructions},</if>
+         </trim>
+    </insert>
+
+    <update id="updateDataUrinalysis" parameterType="DataUrinalysis">
+        update data_urinalysis
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="encounterId != null">encounterId = #{encounterId},</if>
+            <if test="hospitalId != null">hospitalId = #{hospitalId},</if>
+            <if test="chartTime != null">chartTime = #{chartTime},</if>
+            <if test="urinePH != null">urinePH = #{urinePH},</if>
+            <if test="urineRBC != null">urineRBC = #{urineRBC},</if>
+            <if test="urineWBC != null">urineWBC = #{urineWBC},</if>
+            <if test="urineSpecificGravity != null">urineSpecificGravity = #{urineSpecificGravity},</if>
+            <if test="urineUrate != null">urineUrate = #{urineUrate},</if>
+            <if test="urineAmylase != null">urineAmylase = #{urineAmylase},</if>
+            <if test="hyalineCasts != null">hyalineCasts = #{hyalineCasts},</if>
+            <if test="pathologicalCasts != null">pathologicalCasts = #{pathologicalCasts},</if>
+            <if test="urateCrystals != null">urateCrystals = #{urateCrystals},</if>
+            <if test="calciumOxalateCrystals != null">calciumOxalateCrystals = #{calciumOxalateCrystals},</if>
+            <if test="uricAcidCrystals != null">uricAcidCrystals = #{uricAcidCrystals},</if>
+            <if test="squamousEpithelialCells != null">squamousEpithelialCells = #{squamousEpithelialCells},</if>
+            <if test="magnesiumAmmoniumPhosphateCrystals != null">magnesiumAmmoniumPhosphateCrystals = #{magnesiumAmmoniumPhosphateCrystals},</if>
+            <if test="vitaminC != null">vitaminC = #{vitaminC},</if>
+            <if test="leukocyteClusters != null">leukocyteClusters = #{leukocyteClusters},</if>
+            <if test="mucusThreads != null">mucusThreads = #{mucusThreads},</if>
+            <if test="yeast != null">yeast = #{yeast},</if>
+            <if test="bacilli != null">bacilli = #{bacilli},</if>
+            <if test="rbcHPF != null">rbcHPF = #{rbcHPF},</if>
+            <if test="nonSquamousEpithelialCells != null">nonSquamousEpithelialCells = #{nonSquamousEpithelialCells},</if>
+            <if test="spermatozoa != null">spermatozoa = #{spermatozoa},</if>
+            <if test="squamousEpithelialCellsHPF != null">squamousEpithelialCellsHPF = #{squamousEpithelialCellsHPF},</if>
+            <if test="suspectedCocci != null">suspectedCocci = #{suspectedCocci},</if>
+            <if test="wbcHPF != null">wbcHPF = #{wbcHPF},</if>
+            <if test="bacteria != null">bacteria = #{bacteria},</if>
+            <if test="cocci != null">cocci = #{cocci},</if>
+            <if test="phosphateCrystals != null">phosphateCrystals = #{phosphateCrystals},</if>
+            <if test="monohydrateCalciumOxalateCrystals != null">monohydrateCalciumOxalateCrystals = #{monohydrateCalciumOxalateCrystals},</if>
+            <if test="dihydrateCalciumOxalateCrystals != null">dihydrateCalciumOxalateCrystals = #{dihydrateCalciumOxalateCrystals},</if>
+            <if test="Instructions != null">Instructions = #{Instructions},</if>
+        </trim>
+        where Id = #{Id}
+    </update>
+
+    <delete id="deleteDataUrinalysisById" parameterType="Long">
+        delete from data_urinalysis where Id = #{Id}
+    </delete>
+
+    <delete id="deleteDataUrinalysisByIds" parameterType="String">
+        delete from data_urinalysis where Id in 
+        <foreach item="Id" collection="array" open="(" separator="," close=")">
+            #{Id}
+        </foreach>
+    </delete>
+
+
+    <!-- 根据病例编号查询 -->
+    <select id="selectDataUrinalysisByEncounterId" parameterType="Long" resultType="com.kd.system.domain.DataUrinalysis">
+        SELECT *
+        FROM data_urinalysis
+        WHERE encounterId = #{encounterId}
+    </select>
+</mapper>

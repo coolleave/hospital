@@ -1,0 +1,233 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.kd.system.mapper.DataLiverFunctionBiochemistryMapper">
+    
+    <resultMap type="DataLiverFunctionBiochemistry" id="DataLiverFunctionBiochemistryResult">
+        <result property="Id"    column="Id"    />
+        <result property="encounterId"    column="encounterId"    />
+        <result property="hospitalId"    column="hospitalId"    />
+        <result property="chartTime"    column="chartTime"    />
+        <result property="totalProtein"    column="totalProtein"    />
+        <result property="albumin"    column="albumin"    />
+        <result property="globulin"    column="globulin"    />
+        <result property="totalBilirubin"    column="totalBilirubin"    />
+        <result property="indirectBilirubin"    column="indirectBilirubin"    />
+        <result property="directBilirubin"    column="directBilirubin"    />
+        <result property="aspartateAminotransferase"    column="aspartateAminotransferase"    />
+        <result property="alanineAminotransferase"    column="alanineAminotransferase"    />
+        <result property="alkalinePhosphatase"    column="alkalinePhosphatase"    />
+        <result property="homocysteine"    column="homocysteine"    />
+        <result property="totalBileAcids"    column="totalBileAcids"    />
+        <result property="gammaGlutamylTransferase"    column="gammaGlutamylTransferase"    />
+        <result property="lactateDehydrogenase"    column="lactateDehydrogenase"    />
+        <result property="hydroxybutyrateDehydrogenase"    column="hydroxybutyrateDehydrogenase"    />
+        <result property="serumAmyloidA"    column="serumAmyloidA"    />
+        <result property="astToAltRatio"    column="astToAltRatio"    />
+        <result property="prealbumin"    column="prealbumin"    />
+        <result property="cholinesterase"    column="cholinesterase"    />
+        <result property="creatinine"    column="creatinine"    />
+        <result property="ureaNitrogen"    column="ureaNitrogen"    />
+        <result property="glomerularFiltrationRate"    column="glomerularFiltrationRate"    />
+        <result property="serumCystatinC"    column="serumCystatinC"    />
+        <result property="potassium"    column="potassium"    />
+        <result property="calcium"    column="calcium"    />
+        <result property="chloride"    column="chloride"    />
+        <result property="sodium"    column="sodium"    />
+        <result property="totalCarbonDioxide"    column="totalCarbonDioxide"    />
+        <result property="magnesium"    column="magnesium"    />
+        <result property="phosphorus"    column="phosphorus"    />
+        <result property="anionGap"    column="anionGap"    />
+        <result property="osmolality"    column="osmolality"    />
+        <result property="Instructions"    column="Instructions"    />
+    </resultMap>
+
+    <sql id="selectDataLiverFunctionBiochemistryVo">
+        select Id, encounterId, hospitalId, chartTime, totalProtein, albumin, globulin, totalBilirubin, indirectBilirubin, directBilirubin, aspartateAminotransferase, alanineAminotransferase, alkalinePhosphatase, homocysteine, totalBileAcids, gammaGlutamylTransferase, lactateDehydrogenase, hydroxybutyrateDehydrogenase, serumAmyloidA, astToAltRatio, prealbumin, cholinesterase, creatinine, ureaNitrogen, glomerularFiltrationRate, serumCystatinC, potassium, calcium, chloride, sodium, totalCarbonDioxide, magnesium, phosphorus, anionGap, osmolality, Instructions from data_liver_function_biochemistry
+    </sql>
+
+    <select id="selectDataLiverFunctionBiochemistryList" parameterType="DataLiverFunctionBiochemistry" resultMap="DataLiverFunctionBiochemistryResult">
+        <include refid="selectDataLiverFunctionBiochemistryVo"/>
+        <where>  
+            <if test="encounterId != null "> and encounterId = #{encounterId}</if>
+            <if test="hospitalId != null "> and hospitalId = #{hospitalId}</if>
+            <if test="params.beginChartTime != null and params.beginChartTime != '' and params.endChartTime != null and params.endChartTime != ''"> and chartTime between #{params.beginChartTime} and #{params.endChartTime}</if>
+            <if test="totalProtein != null "> and totalProtein = #{totalProtein}</if>
+            <if test="albumin != null "> and albumin = #{albumin}</if>
+            <if test="globulin != null "> and globulin = #{globulin}</if>
+            <if test="totalBilirubin != null "> and totalBilirubin = #{totalBilirubin}</if>
+            <if test="indirectBilirubin != null "> and indirectBilirubin = #{indirectBilirubin}</if>
+            <if test="directBilirubin != null "> and directBilirubin = #{directBilirubin}</if>
+            <if test="aspartateAminotransferase != null "> and aspartateAminotransferase = #{aspartateAminotransferase}</if>
+            <if test="alanineAminotransferase != null "> and alanineAminotransferase = #{alanineAminotransferase}</if>
+            <if test="alkalinePhosphatase != null "> and alkalinePhosphatase = #{alkalinePhosphatase}</if>
+            <if test="homocysteine != null "> and homocysteine = #{homocysteine}</if>
+            <if test="totalBileAcids != null "> and totalBileAcids = #{totalBileAcids}</if>
+            <if test="gammaGlutamylTransferase != null "> and gammaGlutamylTransferase = #{gammaGlutamylTransferase}</if>
+            <if test="lactateDehydrogenase != null "> and lactateDehydrogenase = #{lactateDehydrogenase}</if>
+            <if test="hydroxybutyrateDehydrogenase != null "> and hydroxybutyrateDehydrogenase = #{hydroxybutyrateDehydrogenase}</if>
+            <if test="serumAmyloidA != null "> and serumAmyloidA = #{serumAmyloidA}</if>
+            <if test="astToAltRatio != null "> and astToAltRatio = #{astToAltRatio}</if>
+            <if test="prealbumin != null "> and prealbumin = #{prealbumin}</if>
+            <if test="cholinesterase != null "> and cholinesterase = #{cholinesterase}</if>
+            <if test="creatinine != null "> and creatinine = #{creatinine}</if>
+            <if test="ureaNitrogen != null "> and ureaNitrogen = #{ureaNitrogen}</if>
+            <if test="glomerularFiltrationRate != null "> and glomerularFiltrationRate = #{glomerularFiltrationRate}</if>
+            <if test="serumCystatinC != null "> and serumCystatinC = #{serumCystatinC}</if>
+            <if test="potassium != null "> and potassium = #{potassium}</if>
+            <if test="calcium != null "> and calcium = #{calcium}</if>
+            <if test="chloride != null "> and chloride = #{chloride}</if>
+            <if test="sodium != null "> and sodium = #{sodium}</if>
+            <if test="totalCarbonDioxide != null "> and totalCarbonDioxide = #{totalCarbonDioxide}</if>
+            <if test="magnesium != null "> and magnesium = #{magnesium}</if>
+            <if test="phosphorus != null "> and phosphorus = #{phosphorus}</if>
+            <if test="anionGap != null "> and anionGap = #{anionGap}</if>
+            <if test="osmolality != null "> and osmolality = #{osmolality}</if>
+            <if test="Instructions != null  and Instructions != ''"> and Instructions like concat('%', #{Instructions}, '%')</if>
+        </where>
+    </select>
+    
+    <select id="selectDataLiverFunctionBiochemistryById" parameterType="Long" resultMap="DataLiverFunctionBiochemistryResult">
+        <include refid="selectDataLiverFunctionBiochemistryVo"/>
+        where Id = #{Id}
+    </select>
+
+    <insert id="insertDataLiverFunctionBiochemistry" parameterType="DataLiverFunctionBiochemistry" useGeneratedKeys="true" keyProperty="Id">
+        insert into data_liver_function_biochemistry
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="encounterId != null">encounterId,</if>
+            <if test="hospitalId != null">hospitalId,</if>
+            <if test="chartTime != null">chartTime,</if>
+            <if test="totalProtein != null">totalProtein,</if>
+            <if test="albumin != null">albumin,</if>
+            <if test="globulin != null">globulin,</if>
+            <if test="totalBilirubin != null">totalBilirubin,</if>
+            <if test="indirectBilirubin != null">indirectBilirubin,</if>
+            <if test="directBilirubin != null">directBilirubin,</if>
+            <if test="aspartateAminotransferase != null">aspartateAminotransferase,</if>
+            <if test="alanineAminotransferase != null">alanineAminotransferase,</if>
+            <if test="alkalinePhosphatase != null">alkalinePhosphatase,</if>
+            <if test="homocysteine != null">homocysteine,</if>
+            <if test="totalBileAcids != null">totalBileAcids,</if>
+            <if test="gammaGlutamylTransferase != null">gammaGlutamylTransferase,</if>
+            <if test="lactateDehydrogenase != null">lactateDehydrogenase,</if>
+            <if test="hydroxybutyrateDehydrogenase != null">hydroxybutyrateDehydrogenase,</if>
+            <if test="serumAmyloidA != null">serumAmyloidA,</if>
+            <if test="astToAltRatio != null">astToAltRatio,</if>
+            <if test="prealbumin != null">prealbumin,</if>
+            <if test="cholinesterase != null">cholinesterase,</if>
+            <if test="creatinine != null">creatinine,</if>
+            <if test="ureaNitrogen != null">ureaNitrogen,</if>
+            <if test="glomerularFiltrationRate != null">glomerularFiltrationRate,</if>
+            <if test="serumCystatinC != null">serumCystatinC,</if>
+            <if test="potassium != null">potassium,</if>
+            <if test="calcium != null">calcium,</if>
+            <if test="chloride != null">chloride,</if>
+            <if test="sodium != null">sodium,</if>
+            <if test="totalCarbonDioxide != null">totalCarbonDioxide,</if>
+            <if test="magnesium != null">magnesium,</if>
+            <if test="phosphorus != null">phosphorus,</if>
+            <if test="anionGap != null">anionGap,</if>
+            <if test="osmolality != null">osmolality,</if>
+            <if test="Instructions != null">Instructions,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="encounterId != null">#{encounterId},</if>
+            <if test="hospitalId != null">#{hospitalId},</if>
+            <if test="chartTime != null">#{chartTime},</if>
+            <if test="totalProtein != null">#{totalProtein},</if>
+            <if test="albumin != null">#{albumin},</if>
+            <if test="globulin != null">#{globulin},</if>
+            <if test="totalBilirubin != null">#{totalBilirubin},</if>
+            <if test="indirectBilirubin != null">#{indirectBilirubin},</if>
+            <if test="directBilirubin != null">#{directBilirubin},</if>
+            <if test="aspartateAminotransferase != null">#{aspartateAminotransferase},</if>
+            <if test="alanineAminotransferase != null">#{alanineAminotransferase},</if>
+            <if test="alkalinePhosphatase != null">#{alkalinePhosphatase},</if>
+            <if test="homocysteine != null">#{homocysteine},</if>
+            <if test="totalBileAcids != null">#{totalBileAcids},</if>
+            <if test="gammaGlutamylTransferase != null">#{gammaGlutamylTransferase},</if>
+            <if test="lactateDehydrogenase != null">#{lactateDehydrogenase},</if>
+            <if test="hydroxybutyrateDehydrogenase != null">#{hydroxybutyrateDehydrogenase},</if>
+            <if test="serumAmyloidA != null">#{serumAmyloidA},</if>
+            <if test="astToAltRatio != null">#{astToAltRatio},</if>
+            <if test="prealbumin != null">#{prealbumin},</if>
+            <if test="cholinesterase != null">#{cholinesterase},</if>
+            <if test="creatinine != null">#{creatinine},</if>
+            <if test="ureaNitrogen != null">#{ureaNitrogen},</if>
+            <if test="glomerularFiltrationRate != null">#{glomerularFiltrationRate},</if>
+            <if test="serumCystatinC != null">#{serumCystatinC},</if>
+            <if test="potassium != null">#{potassium},</if>
+            <if test="calcium != null">#{calcium},</if>
+            <if test="chloride != null">#{chloride},</if>
+            <if test="sodium != null">#{sodium},</if>
+            <if test="totalCarbonDioxide != null">#{totalCarbonDioxide},</if>
+            <if test="magnesium != null">#{magnesium},</if>
+            <if test="phosphorus != null">#{phosphorus},</if>
+            <if test="anionGap != null">#{anionGap},</if>
+            <if test="osmolality != null">#{osmolality},</if>
+            <if test="Instructions != null">#{Instructions},</if>
+         </trim>
+    </insert>
+
+    <update id="updateDataLiverFunctionBiochemistry" parameterType="DataLiverFunctionBiochemistry">
+        update data_liver_function_biochemistry
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="encounterId != null">encounterId = #{encounterId},</if>
+            <if test="hospitalId != null">hospitalId = #{hospitalId},</if>
+            <if test="chartTime != null">chartTime = #{chartTime},</if>
+            <if test="totalProtein != null">totalProtein = #{totalProtein},</if>
+            <if test="albumin != null">albumin = #{albumin},</if>
+            <if test="globulin != null">globulin = #{globulin},</if>
+            <if test="totalBilirubin != null">totalBilirubin = #{totalBilirubin},</if>
+            <if test="indirectBilirubin != null">indirectBilirubin = #{indirectBilirubin},</if>
+            <if test="directBilirubin != null">directBilirubin = #{directBilirubin},</if>
+            <if test="aspartateAminotransferase != null">aspartateAminotransferase = #{aspartateAminotransferase},</if>
+            <if test="alanineAminotransferase != null">alanineAminotransferase = #{alanineAminotransferase},</if>
+            <if test="alkalinePhosphatase != null">alkalinePhosphatase = #{alkalinePhosphatase},</if>
+            <if test="homocysteine != null">homocysteine = #{homocysteine},</if>
+            <if test="totalBileAcids != null">totalBileAcids = #{totalBileAcids},</if>
+            <if test="gammaGlutamylTransferase != null">gammaGlutamylTransferase = #{gammaGlutamylTransferase},</if>
+            <if test="lactateDehydrogenase != null">lactateDehydrogenase = #{lactateDehydrogenase},</if>
+            <if test="hydroxybutyrateDehydrogenase != null">hydroxybutyrateDehydrogenase = #{hydroxybutyrateDehydrogenase},</if>
+            <if test="serumAmyloidA != null">serumAmyloidA = #{serumAmyloidA},</if>
+            <if test="astToAltRatio != null">astToAltRatio = #{astToAltRatio},</if>
+            <if test="prealbumin != null">prealbumin = #{prealbumin},</if>
+            <if test="cholinesterase != null">cholinesterase = #{cholinesterase},</if>
+            <if test="creatinine != null">creatinine = #{creatinine},</if>
+            <if test="ureaNitrogen != null">ureaNitrogen = #{ureaNitrogen},</if>
+            <if test="glomerularFiltrationRate != null">glomerularFiltrationRate = #{glomerularFiltrationRate},</if>
+            <if test="serumCystatinC != null">serumCystatinC = #{serumCystatinC},</if>
+            <if test="potassium != null">potassium = #{potassium},</if>
+            <if test="calcium != null">calcium = #{calcium},</if>
+            <if test="chloride != null">chloride = #{chloride},</if>
+            <if test="sodium != null">sodium = #{sodium},</if>
+            <if test="totalCarbonDioxide != null">totalCarbonDioxide = #{totalCarbonDioxide},</if>
+            <if test="magnesium != null">magnesium = #{magnesium},</if>
+            <if test="phosphorus != null">phosphorus = #{phosphorus},</if>
+            <if test="anionGap != null">anionGap = #{anionGap},</if>
+            <if test="osmolality != null">osmolality = #{osmolality},</if>
+            <if test="Instructions != null">Instructions = #{Instructions},</if>
+        </trim>
+        where Id = #{Id}
+    </update>
+
+    <delete id="deleteDataLiverFunctionBiochemistryById" parameterType="Long">
+        delete from data_liver_function_biochemistry where Id = #{Id}
+    </delete>
+
+    <delete id="deleteDataLiverFunctionBiochemistryByIds" parameterType="String">
+        delete from data_liver_function_biochemistry where Id in 
+        <foreach item="Id" collection="array" open="(" separator="," close=")">
+            #{Id}
+        </foreach>
+    </delete>
+
+    <!-- 根据病例编号查询 -->
+    <select id="selectDataLiverFunctionBiochemistryByEncounterId" parameterType="Long" resultType="com.kd.system.domain.DataBloodGas">
+        SELECT *
+        FROM data_liver_function_biochemistry
+        WHERE encounterId = #{encounterId}
+    </select>
+</mapper>

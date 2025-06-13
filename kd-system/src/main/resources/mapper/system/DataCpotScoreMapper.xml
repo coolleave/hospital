@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.kd.system.mapper.DataCpotScoreMapper">
+    
+    <resultMap type="DataCpotScore" id="DataCpotScoreResult">
+        <result property="Id"    column="Id"    />
+        <result property="encounterId"    column="encounterId"    />
+        <result property="hospitalId"    column="hospitalId"    />
+        <result property="chartTime"    column="chartTime"    />
+        <result property="cpotFacialExpression"    column="CPOT_facial_expression"    />
+        <result property="cpotSynchronyWithVentilator"    column="CPOT_synchrony_with_ventilator"    />
+        <result property="cpotVocalizationWithoutTracheostomyOrIntubation"    column="CPOT_vocalization_without_tracheostomy_or_intubation"    />
+        <result property="cpotAnalgesics"    column="CPOT_analgesics"    />
+        <result property="cpotCue"    column="CPOT_cue"    />
+        <result property="cpotLimbMovement"    column="CPOT_limb_movement"    />
+        <result property="cpotMuscleTension"    column="CPOT_muscle_tension"    />
+        <result property="cpotTotal"    column="CPOT_total"    />
+        <result property="Instructions"    column="Instructions"    />
+    </resultMap>
+
+    <sql id="selectDataCpotScoreVo">
+        select Id, encounterId, hospitalId, chartTime, CPOT_facial_expression, CPOT_synchrony_with_ventilator, CPOT_vocalization_without_tracheostomy_or_intubation, CPOT_analgesics, CPOT_cue, CPOT_limb_movement, CPOT_muscle_tension, CPOT_total, Instructions from data_cpot_score
+    </sql>
+
+    <select id="selectDataCpotScoreList" parameterType="DataCpotScore" resultMap="DataCpotScoreResult">
+        <include refid="selectDataCpotScoreVo"/>
+        <where>  
+            <if test="encounterId != null "> and encounterId = #{encounterId}</if>
+            <if test="hospitalId != null "> and hospitalId = #{hospitalId}</if>
+            <if test="params.beginChartTime != null and params.beginChartTime != '' and params.endChartTime != null and params.endChartTime != ''"> and chartTime between #{params.beginChartTime} and #{params.endChartTime}</if>
+            <if test="cpotFacialExpression != null "> and CPOT_facial_expression = #{cpotFacialExpression}</if>
+            <if test="cpotSynchronyWithVentilator != null "> and CPOT_synchrony_with_ventilator = #{cpotSynchronyWithVentilator}</if>
+            <if test="cpotVocalizationWithoutTracheostomyOrIntubation != null "> and CPOT_vocalization_without_tracheostomy_or_intubation = #{cpotVocalizationWithoutTracheostomyOrIntubation}</if>
+            <if test="cpotAnalgesics != null  and cpotAnalgesics != ''"> and CPOT_analgesics = #{cpotAnalgesics}</if>
+            <if test="cpotCue != null  and cpotCue != ''"> and CPOT_cue like concat('%', #{cpotCue}, '%')</if>
+            <if test="cpotLimbMovement != null "> and CPOT_limb_movement = #{cpotLimbMovement}</if>
+            <if test="cpotMuscleTension != null "> and CPOT_muscle_tension = #{cpotMuscleTension}</if>
+            <if test="cpotTotal != null "> and CPOT_total = #{cpotTotal}</if>
+            <if test="Instructions != null  and Instructions != ''"> and Instructions like concat('%', #{Instructions}, '%')</if>
+        </where>
+    </select>
+    
+    <select id="selectDataCpotScoreById" parameterType="Long" resultMap="DataCpotScoreResult">
+        <include refid="selectDataCpotScoreVo"/>
+        where Id = #{Id}
+    </select>
+
+    <insert id="insertDataCpotScore" parameterType="DataCpotScore" useGeneratedKeys="true" keyProperty="Id">
+        insert into data_cpot_score
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="encounterId != null">encounterId,</if>
+            <if test="hospitalId != null">hospitalId,</if>
+            <if test="chartTime != null">chartTime,</if>
+            <if test="cpotFacialExpression != null">CPOT_facial_expression,</if>
+            <if test="cpotSynchronyWithVentilator != null">CPOT_synchrony_with_ventilator,</if>
+            <if test="cpotVocalizationWithoutTracheostomyOrIntubation != null">CPOT_vocalization_without_tracheostomy_or_intubation,</if>
+            <if test="cpotAnalgesics != null">CPOT_analgesics,</if>
+            <if test="cpotCue != null">CPOT_cue,</if>
+            <if test="cpotLimbMovement != null">CPOT_limb_movement,</if>
+            <if test="cpotMuscleTension != null">CPOT_muscle_tension,</if>
+            <if test="cpotTotal != null">CPOT_total,</if>
+            <if test="Instructions != null">Instructions,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="encounterId != null">#{encounterId},</if>
+            <if test="hospitalId != null">#{hospitalId},</if>
+            <if test="chartTime != null">#{chartTime},</if>
+            <if test="cpotFacialExpression != null">#{cpotFacialExpression},</if>
+            <if test="cpotSynchronyWithVentilator != null">#{cpotSynchronyWithVentilator},</if>
+            <if test="cpotVocalizationWithoutTracheostomyOrIntubation != null">#{cpotVocalizationWithoutTracheostomyOrIntubation},</if>
+            <if test="cpotAnalgesics != null">#{cpotAnalgesics},</if>
+            <if test="cpotCue != null">#{cpotCue},</if>
+            <if test="cpotLimbMovement != null">#{cpotLimbMovement},</if>
+            <if test="cpotMuscleTension != null">#{cpotMuscleTension},</if>
+            <if test="cpotTotal != null">#{cpotTotal},</if>
+            <if test="Instructions != null">#{Instructions},</if>
+         </trim>
+    </insert>
+
+    <update id="updateDataCpotScore" parameterType="DataCpotScore">
+        update data_cpot_score
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="encounterId != null">encounterId = #{encounterId},</if>
+            <if test="hospitalId != null">hospitalId = #{hospitalId},</if>
+            <if test="chartTime != null">chartTime = #{chartTime},</if>
+            <if test="cpotFacialExpression != null">CPOT_facial_expression = #{cpotFacialExpression},</if>
+            <if test="cpotSynchronyWithVentilator != null">CPOT_synchrony_with_ventilator = #{cpotSynchronyWithVentilator},</if>
+            <if test="cpotVocalizationWithoutTracheostomyOrIntubation != null">CPOT_vocalization_without_tracheostomy_or_intubation = #{cpotVocalizationWithoutTracheostomyOrIntubation},</if>
+            <if test="cpotAnalgesics != null">CPOT_analgesics = #{cpotAnalgesics},</if>
+            <if test="cpotCue != null">CPOT_cue = #{cpotCue},</if>
+            <if test="cpotLimbMovement != null">CPOT_limb_movement = #{cpotLimbMovement},</if>
+            <if test="cpotMuscleTension != null">CPOT_muscle_tension = #{cpotMuscleTension},</if>
+            <if test="cpotTotal != null">CPOT_total = #{cpotTotal},</if>
+            <if test="Instructions != null">Instructions = #{Instructions},</if>
+        </trim>
+        where Id = #{Id}
+    </update>
+
+    <delete id="deleteDataCpotScoreById" parameterType="Long">
+        delete from data_cpot_score where Id = #{Id}
+    </delete>
+
+    <delete id="deleteDataCpotScoreByIds" parameterType="String">
+        delete from data_cpot_score where Id in 
+        <foreach item="Id" collection="array" open="(" separator="," close=")">
+            #{Id}
+        </foreach>
+    </delete>
+
+    <!-- 根据病例编号查询 -->
+    <select id="selectDataCpotScoreByEncounterId" parameterType="Long" resultType="com.kd.system.domain.DataCpotScore">
+        SELECT *
+        FROM data_cpot_score
+        WHERE encounterId = #{encounterId}
+    </select>
+</mapper>

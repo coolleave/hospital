@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.kd.system.mapper.DataBloodGasMapper">
+    
+    <resultMap type="DataBloodGas" id="DataBloodGasResult">
+        <result property="Id"    column="Id"    />
+        <result property="encounterId"    column="encounterId"    />
+        <result property="hospitalId"    column="hospitalId"    />
+        <result property="chartTime"    column="chartTime"    />
+        <result property="cK"    column="cK"    />
+        <result property="pO2"    column="pO2"    />
+        <result property="cBase"    column="cBase"    />
+        <result property="cCa2"    column="cCa2"    />
+        <result property="Hct"    column="Hct"    />
+        <result property="pH"    column="pH"    />
+        <result property="ctHb"    column="ctHb"    />
+        <result property="cCl"    column="cCl"    />
+        <result property="cNa"    column="cNa"    />
+        <result property="pCO2"    column="pCO2"    />
+        <result property="FO2"    column="FO2"    />
+        <result property="cLac"    column="cLac"    />
+        <result property="cHCO3"    column="cHCO3"    />
+        <result property="AaDpO2"    column="AaDpO2"    />
+        <result property="Instructions"    column="Instructions"    />
+    </resultMap>
+
+    <sql id="selectDataBloodGasVo">
+        select Id, encounterId, hospitalId, chartTime, cK, pO2, cBase, cCa2, Hct, pH, ctHb, cCl, cNa, pCO2, FO2, cLac, cHCO3, AaDpO2, Instructions from data_blood_gas
+    </sql>
+
+    <select id="selectDataBloodGasList" parameterType="DataBloodGas" resultMap="DataBloodGasResult">
+        <include refid="selectDataBloodGasVo"/>
+        <where>  
+            <if test="encounterId != null "> and encounterId = #{encounterId}</if>
+            <if test="hospitalId != null "> and hospitalId = #{hospitalId}</if>
+            <if test="params.beginChartTime != null and params.beginChartTime != '' and params.endChartTime != null and params.endChartTime != ''"> and chartTime between #{params.beginChartTime} and #{params.endChartTime}</if>
+            <if test="cK != null "> and cK = #{cK}</if>
+            <if test="pO2 != null "> and pO2 = #{pO2}</if>
+            <if test="cBase != null "> and cBase = #{cBase}</if>
+            <if test="cCa2 != null "> and cCa2 = #{cCa2}</if>
+            <if test="Hct != null "> and Hct = #{Hct}</if>
+            <if test="pH != null "> and pH = #{pH}</if>
+            <if test="ctHb != null "> and ctHb = #{ctHb}</if>
+            <if test="cCl != null "> and cCl = #{cCl}</if>
+            <if test="cNa != null "> and cNa = #{cNa}</if>
+            <if test="pCO2 != null "> and pCO2 = #{pCO2}</if>
+            <if test="FO2 != null "> and FO2 = #{FO2}</if>
+            <if test="cLac != null "> and cLac = #{cLac}</if>
+            <if test="cHCO3 != null "> and cHCO3 = #{cHCO3}</if>
+            <if test="AaDpO2 != null "> and AaDpO2 = #{AaDpO2}</if>
+            <if test="Instructions != null  and Instructions != ''"> and Instructions like concat('%', #{Instructions}, '%')</if>
+        </where>
+    </select>
+    
+    <select id="selectDataBloodGasById" parameterType="Long" resultMap="DataBloodGasResult">
+        <include refid="selectDataBloodGasVo"/>
+        where Id = #{Id}
+    </select>
+
+    <insert id="insertDataBloodGas" parameterType="DataBloodGas" useGeneratedKeys="true" keyProperty="Id">
+        insert into data_blood_gas
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="encounterId != null">encounterId,</if>
+            <if test="hospitalId != null">hospitalId,</if>
+            <if test="chartTime != null">chartTime,</if>
+            <if test="cK != null">cK,</if>
+            <if test="pO2 != null">pO2,</if>
+            <if test="cBase != null">cBase,</if>
+            <if test="cCa2 != null">cCa2,</if>
+            <if test="Hct != null">Hct,</if>
+            <if test="pH != null">pH,</if>
+            <if test="ctHb != null">ctHb,</if>
+            <if test="cCl != null">cCl,</if>
+            <if test="cNa != null">cNa,</if>
+            <if test="pCO2 != null">pCO2,</if>
+            <if test="FO2 != null">FO2,</if>
+            <if test="cLac != null">cLac,</if>
+            <if test="cHCO3 != null">cHCO3,</if>
+            <if test="AaDpO2 != null">AaDpO2,</if>
+            <if test="Instructions != null">Instructions,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="encounterId != null">#{encounterId},</if>
+            <if test="hospitalId != null">#{hospitalId},</if>
+            <if test="chartTime != null">#{chartTime},</if>
+            <if test="cK != null">#{cK},</if>
+            <if test="pO2 != null">#{pO2},</if>
+            <if test="cBase != null">#{cBase},</if>
+            <if test="cCa2 != null">#{cCa2},</if>
+            <if test="Hct != null">#{Hct},</if>
+            <if test="pH != null">#{pH},</if>
+            <if test="ctHb != null">#{ctHb},</if>
+            <if test="cCl != null">#{cCl},</if>
+            <if test="cNa != null">#{cNa},</if>
+            <if test="pCO2 != null">#{pCO2},</if>
+            <if test="FO2 != null">#{FO2},</if>
+            <if test="cLac != null">#{cLac},</if>
+            <if test="cHCO3 != null">#{cHCO3},</if>
+            <if test="AaDpO2 != null">#{AaDpO2},</if>
+            <if test="Instructions != null">#{Instructions},</if>
+         </trim>
+    </insert>
+
+    <update id="updateDataBloodGas" parameterType="DataBloodGas">
+        update data_blood_gas
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="encounterId != null">encounterId = #{encounterId},</if>
+            <if test="hospitalId != null">hospitalId = #{hospitalId},</if>
+            <if test="chartTime != null">chartTime = #{chartTime},</if>
+            <if test="cK != null">cK = #{cK},</if>
+            <if test="pO2 != null">pO2 = #{pO2},</if>
+            <if test="cBase != null">cBase = #{cBase},</if>
+            <if test="cCa2 != null">cCa2 = #{cCa2},</if>
+            <if test="Hct != null">Hct = #{Hct},</if>
+            <if test="pH != null">pH = #{pH},</if>
+            <if test="ctHb != null">ctHb = #{ctHb},</if>
+            <if test="cCl != null">cCl = #{cCl},</if>
+            <if test="cNa != null">cNa = #{cNa},</if>
+            <if test="pCO2 != null">pCO2 = #{pCO2},</if>
+            <if test="FO2 != null">FO2 = #{FO2},</if>
+            <if test="cLac != null">cLac = #{cLac},</if>
+            <if test="cHCO3 != null">cHCO3 = #{cHCO3},</if>
+            <if test="AaDpO2 != null">AaDpO2 = #{AaDpO2},</if>
+            <if test="Instructions != null">Instructions = #{Instructions},</if>
+        </trim>
+        where Id = #{Id}
+    </update>
+
+    <delete id="deleteDataBloodGasById" parameterType="Long">
+        delete from data_blood_gas where Id = #{Id}
+    </delete>
+
+    <delete id="deleteDataBloodGasByIds" parameterType="String">
+        delete from data_blood_gas where Id in 
+        <foreach item="Id" collection="array" open="(" separator="," close=")">
+            #{Id}
+        </foreach>
+    </delete>
+
+    <!-- 根据病例编号查询 -->
+    <select id="selectDataBloodGasByEncounterId" parameterType="Long" resultType="com.kd.system.domain.DataBloodGas">
+        SELECT *
+        FROM data_blood_gas
+        WHERE encounterId = #{encounterId}
+    </select>
+
+</mapper>

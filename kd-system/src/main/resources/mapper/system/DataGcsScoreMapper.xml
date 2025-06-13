@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.kd.system.mapper.DataGcsScoreMapper">
+    
+    <resultMap type="DataGcsScore" id="DataGcsScoreResult">
+        <result property="Id"    column="Id"    />
+        <result property="encounterId"    column="encounterId"    />
+        <result property="hospitalId"    column="hospitalId"    />
+        <result property="chartTime"    column="chartTime"    />
+        <result property="gcsMotor"    column="GCS_motor"    />
+        <result property="gcsEyeOpening"    column="GCS_eye_opening"    />
+        <result property="gcsScore"    column="GCS_score"    />
+        <result property="gcsVerbalResponse"    column="GCS_verbal_response"    />
+        <result property="gcsTotal"    column="GCS_total"    />
+        <result property="Instructions"    column="Instructions"    />
+    </resultMap>
+
+    <sql id="selectDataGcsScoreVo">
+        select Id, encounterId, hospitalId, chartTime, GCS_motor, GCS_eye_opening, GCS_score, GCS_verbal_response, GCS_total, Instructions from data_gcs_score
+    </sql>
+
+    <select id="selectDataGcsScoreList" parameterType="DataGcsScore" resultMap="DataGcsScoreResult">
+        <include refid="selectDataGcsScoreVo"/>
+        <where>  
+            <if test="encounterId != null "> and encounterId = #{encounterId}</if>
+            <if test="hospitalId != null "> and hospitalId = #{hospitalId}</if>
+            <if test="params.beginChartTime != null and params.beginChartTime != '' and params.endChartTime != null and params.endChartTime != ''"> and chartTime between #{params.beginChartTime} and #{params.endChartTime}</if>
+            <if test="gcsMotor != null "> and GCS_motor = #{gcsMotor}</if>
+            <if test="gcsEyeOpening != null "> and GCS_eye_opening = #{gcsEyeOpening}</if>
+            <if test="gcsScore != null "> and GCS_score = #{gcsScore}</if>
+            <if test="gcsVerbalResponse != null "> and GCS_verbal_response = #{gcsVerbalResponse}</if>
+            <if test="gcsTotal != null "> and GCS_total = #{gcsTotal}</if>
+            <if test="Instructions != null  and Instructions != ''"> and Instructions like concat('%', #{Instructions}, '%')</if>
+        </where>
+    </select>
+    
+    <select id="selectDataGcsScoreById" parameterType="Long" resultMap="DataGcsScoreResult">
+        <include refid="selectDataGcsScoreVo"/>
+        where Id = #{Id}
+    </select>
+
+    <insert id="insertDataGcsScore" parameterType="DataGcsScore" useGeneratedKeys="true" keyProperty="Id">
+        insert into data_gcs_score
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="encounterId != null">encounterId,</if>
+            <if test="hospitalId != null">hospitalId,</if>
+            <if test="chartTime != null">chartTime,</if>
+            <if test="gcsMotor != null">GCS_motor,</if>
+            <if test="gcsEyeOpening != null">GCS_eye_opening,</if>
+            <if test="gcsScore != null">GCS_score,</if>
+            <if test="gcsVerbalResponse != null">GCS_verbal_response,</if>
+            <if test="gcsTotal != null">GCS_total,</if>
+            <if test="Instructions != null">Instructions,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="encounterId != null">#{encounterId},</if>
+            <if test="hospitalId != null">#{hospitalId},</if>
+            <if test="chartTime != null">#{chartTime},</if>
+            <if test="gcsMotor != null">#{gcsMotor},</if>
+            <if test="gcsEyeOpening != null">#{gcsEyeOpening},</if>
+            <if test="gcsScore != null">#{gcsScore},</if>
+            <if test="gcsVerbalResponse != null">#{gcsVerbalResponse},</if>
+            <if test="gcsTotal != null">#{gcsTotal},</if>
+            <if test="Instructions != null">#{Instructions},</if>
+         </trim>
+    </insert>
+
+    <update id="updateDataGcsScore" parameterType="DataGcsScore">
+        update data_gcs_score
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="encounterId != null">encounterId = #{encounterId},</if>
+            <if test="hospitalId != null">hospitalId = #{hospitalId},</if>
+            <if test="chartTime != null">chartTime = #{chartTime},</if>
+            <if test="gcsMotor != null">GCS_motor = #{gcsMotor},</if>
+            <if test="gcsEyeOpening != null">GCS_eye_opening = #{gcsEyeOpening},</if>
+            <if test="gcsScore != null">GCS_score = #{gcsScore},</if>
+            <if test="gcsVerbalResponse != null">GCS_verbal_response = #{gcsVerbalResponse},</if>
+            <if test="gcsTotal != null">GCS_total = #{gcsTotal},</if>
+            <if test="Instructions != null">Instructions = #{Instructions},</if>
+        </trim>
+        where Id = #{Id}
+    </update>
+
+    <delete id="deleteDataGcsScoreById" parameterType="Long">
+        delete from data_gcs_score where Id = #{Id}
+    </delete>
+
+    <delete id="deleteDataGcsScoreByIds" parameterType="String">
+        delete from data_gcs_score where Id in 
+        <foreach item="Id" collection="array" open="(" separator="," close=")">
+            #{Id}
+        </foreach>
+    </delete>
+
+    <!-- 根据病例编号查询 -->
+    <select id="selectDataGcsScoreByEncounterId" parameterType="Long" resultType="com.kd.system.domain.DataGcsScore">
+        SELECT *
+        FROM data_gcs_score
+        WHERE encounterId = #{encounterId}
+    </select>
+</mapper>

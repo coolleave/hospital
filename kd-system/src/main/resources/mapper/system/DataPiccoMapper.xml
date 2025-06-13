@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.kd.system.mapper.DataPiccoMapper">
+    
+    <resultMap type="DataPicco" id="DataPiccoResult">
+        <result property="Id"    column="Id"    />
+        <result property="encounterId"    column="encounterId"    />
+        <result property="hospitalId"    column="hospitalId"    />
+        <result property="chartTime"    column="chartTime"    />
+        <result property="CO"    column="CO"    />
+        <result property="sABP"    column="sABP"    />
+        <result property="dABP"    column="dABP"    />
+        <result property="mABP"    column="mABP"    />
+        <result property="BSA"    column="BSA"    />
+        <result property="CVP"    column="CVP"    />
+        <result property="CI"    column="CI"    />
+        <result property="PCCO"    column="PCCO"    />
+        <result property="SV"    column="SV"    />
+        <result property="SVR"    column="SVR"    />
+        <result property="SVV"    column="SVV"    />
+        <result property="GEF"    column="GEF"    />
+        <result property="CFI"    column="CFI"    />
+        <result property="ITBV"    column="ITBV"    />
+        <result property="GEDV"    column="GEDV"    />
+        <result property="PVR"    column="PVR"    />
+        <result property="EVLW"    column="EVLW"    />
+        <result property="Instructions"    column="Instructions"    />
+    </resultMap>
+
+    <sql id="selectDataPiccoVo">
+        select Id, encounterId, hospitalId, chartTime, CO, sABP, dABP, mABP, BSA, CVP, CI, PCCO, SV, SVR, SVV, GEF, CFI, ITBV, GEDV, PVR, EVLW, Instructions from data_picco
+    </sql>
+
+    <select id="selectDataPiccoList" parameterType="DataPicco" resultMap="DataPiccoResult">
+        <include refid="selectDataPiccoVo"/>
+        <where>  
+            <if test="encounterId != null "> and encounterId = #{encounterId}</if>
+            <if test="hospitalId != null "> and hospitalId = #{hospitalId}</if>
+            <if test="params.beginChartTime != null and params.beginChartTime != '' and params.endChartTime != null and params.endChartTime != ''"> and chartTime between #{params.beginChartTime} and #{params.endChartTime}</if>
+            <if test="CO != null "> and CO = #{CO}</if>
+            <if test="sABP != null "> and sABP = #{sABP}</if>
+            <if test="dABP != null "> and dABP = #{dABP}</if>
+            <if test="mABP != null "> and mABP = #{mABP}</if>
+            <if test="BSA != null "> and BSA = #{BSA}</if>
+            <if test="CVP != null "> and CVP = #{CVP}</if>
+            <if test="CI != null "> and CI = #{CI}</if>
+            <if test="PCCO != null "> and PCCO = #{PCCO}</if>
+            <if test="SV != null "> and SV = #{SV}</if>
+            <if test="SVR != null "> and SVR = #{SVR}</if>
+            <if test="SVV != null "> and SVV = #{SVV}</if>
+            <if test="GEF != null "> and GEF = #{GEF}</if>
+            <if test="CFI != null "> and CFI = #{CFI}</if>
+            <if test="ITBV != null "> and ITBV = #{ITBV}</if>
+            <if test="GEDV != null "> and GEDV = #{GEDV}</if>
+            <if test="PVR != null "> and PVR = #{PVR}</if>
+            <if test="EVLW != null "> and EVLW = #{EVLW}</if>
+            <if test="Instructions != null  and Instructions != ''"> and Instructions like concat('%', #{Instructions}, '%')</if>
+        </where>
+    </select>
+    
+    <select id="selectDataPiccoById" parameterType="Long" resultMap="DataPiccoResult">
+        <include refid="selectDataPiccoVo"/>
+        where Id = #{Id}
+    </select>
+
+    <insert id="insertDataPicco" parameterType="DataPicco" useGeneratedKeys="true" keyProperty="Id">
+        insert into data_picco
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="encounterId != null">encounterId,</if>
+            <if test="hospitalId != null">hospitalId,</if>
+            <if test="chartTime != null">chartTime,</if>
+            <if test="CO != null">CO,</if>
+            <if test="sABP != null">sABP,</if>
+            <if test="dABP != null">dABP,</if>
+            <if test="mABP != null">mABP,</if>
+            <if test="BSA != null">BSA,</if>
+            <if test="CVP != null">CVP,</if>
+            <if test="CI != null">CI,</if>
+            <if test="PCCO != null">PCCO,</if>
+            <if test="SV != null">SV,</if>
+            <if test="SVR != null">SVR,</if>
+            <if test="SVV != null">SVV,</if>
+            <if test="GEF != null">GEF,</if>
+            <if test="CFI != null">CFI,</if>
+            <if test="ITBV != null">ITBV,</if>
+            <if test="GEDV != null">GEDV,</if>
+            <if test="PVR != null">PVR,</if>
+            <if test="EVLW != null">EVLW,</if>
+            <if test="Instructions != null">Instructions,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="encounterId != null">#{encounterId},</if>
+            <if test="hospitalId != null">#{hospitalId},</if>
+            <if test="chartTime != null">#{chartTime},</if>
+            <if test="CO != null">#{CO},</if>
+            <if test="sABP != null">#{sABP},</if>
+            <if test="dABP != null">#{dABP},</if>
+            <if test="mABP != null">#{mABP},</if>
+            <if test="BSA != null">#{BSA},</if>
+            <if test="CVP != null">#{CVP},</if>
+            <if test="CI != null">#{CI},</if>
+            <if test="PCCO != null">#{PCCO},</if>
+            <if test="SV != null">#{SV},</if>
+            <if test="SVR != null">#{SVR},</if>
+            <if test="SVV != null">#{SVV},</if>
+            <if test="GEF != null">#{GEF},</if>
+            <if test="CFI != null">#{CFI},</if>
+            <if test="ITBV != null">#{ITBV},</if>
+            <if test="GEDV != null">#{GEDV},</if>
+            <if test="PVR != null">#{PVR},</if>
+            <if test="EVLW != null">#{EVLW},</if>
+            <if test="Instructions != null">#{Instructions},</if>
+         </trim>
+    </insert>
+
+    <update id="updateDataPicco" parameterType="DataPicco">
+        update data_picco
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="encounterId != null">encounterId = #{encounterId},</if>
+            <if test="hospitalId != null">hospitalId = #{hospitalId},</if>
+            <if test="chartTime != null">chartTime = #{chartTime},</if>
+            <if test="CO != null">CO = #{CO},</if>
+            <if test="sABP != null">sABP = #{sABP},</if>
+            <if test="dABP != null">dABP = #{dABP},</if>
+            <if test="mABP != null">mABP = #{mABP},</if>
+            <if test="BSA != null">BSA = #{BSA},</if>
+            <if test="CVP != null">CVP = #{CVP},</if>
+            <if test="CI != null">CI = #{CI},</if>
+            <if test="PCCO != null">PCCO = #{PCCO},</if>
+            <if test="SV != null">SV = #{SV},</if>
+            <if test="SVR != null">SVR = #{SVR},</if>
+            <if test="SVV != null">SVV = #{SVV},</if>
+            <if test="GEF != null">GEF = #{GEF},</if>
+            <if test="CFI != null">CFI = #{CFI},</if>
+            <if test="ITBV != null">ITBV = #{ITBV},</if>
+            <if test="GEDV != null">GEDV = #{GEDV},</if>
+            <if test="PVR != null">PVR = #{PVR},</if>
+            <if test="EVLW != null">EVLW = #{EVLW},</if>
+            <if test="Instructions != null">Instructions = #{Instructions},</if>
+        </trim>
+        where Id = #{Id}
+    </update>
+
+    <delete id="deleteDataPiccoById" parameterType="Long">
+        delete from data_picco where Id = #{Id}
+    </delete>
+
+    <delete id="deleteDataPiccoByIds" parameterType="String">
+        delete from data_picco where Id in 
+        <foreach item="Id" collection="array" open="(" separator="," close=")">
+            #{Id}
+        </foreach>
+    </delete>
+
+    <!-- 根据病例编号查询 -->
+    <select id="selectDataPiccoByEncounterId" parameterType="Long" resultType="com.kd.system.domain.DataPicco">
+        SELECT *
+        FROM data_picco
+        WHERE encounterId = #{encounterId}
+    </select>
+
+</mapper>

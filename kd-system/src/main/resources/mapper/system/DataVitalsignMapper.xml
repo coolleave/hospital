@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.kd.system.mapper.DataVitalsignMapper">
+    
+    <resultMap type="DataVitalsign" id="DataVitalsignResult">
+        <result property="Id"    column="Id"    />
+        <result property="encounterId"    column="encounterId"    />
+        <result property="hospitalId"    column="hospitalId"    />
+        <result property="chartTime"    column="chartTime"    />
+        <result property="temperature"    column="temperature"    />
+        <result property="heartRate"    column="heartRate"    />
+        <result property="respiratoryRate"    column="respiratoryRate"    />
+        <result property="systolicNIBP"    column="systolicNIBP"    />
+        <result property="diastolicNIBP"    column="diastolicNIBP"    />
+        <result property="meanNIBP"    column="meanNIBP"    />
+        <result property="systolicABP"    column="systolicABP"    />
+        <result property="diastolicABP"    column="diastolicABP"    />
+        <result property="meanABP"    column="meanABP"    />
+        <result property="oxygenSaturation"    column="oxygenSaturation"    />
+        <result property="centralvenouspressureMmhg"    column="centralVenousPressure_mmHg"    />
+        <result property="Instructions"    column="Instructions"    />
+    </resultMap>
+
+    <sql id="selectDataVitalsignVo">
+        select Id, encounterId, hospitalId, chartTime, temperature, heartRate, respiratoryRate, systolicNIBP, diastolicNIBP, meanNIBP, systolicABP, diastolicABP, meanABP, oxygenSaturation, centralVenousPressure_mmHg, Instructions from data_vitalsign
+    </sql>
+
+    <select id="selectDataVitalsignList" parameterType="DataVitalsign" resultMap="DataVitalsignResult">
+        <include refid="selectDataVitalsignVo"/>
+        <where>  
+            <if test="encounterId != null "> and encounterId = #{encounterId}</if>
+            <if test="hospitalId != null "> and hospitalId = #{hospitalId}</if>
+            <if test="params.beginChartTime != null and params.beginChartTime != '' and params.endChartTime != null and params.endChartTime != ''"> and chartTime between #{params.beginChartTime} and #{params.endChartTime}</if>
+            <if test="temperature != null "> and temperature = #{temperature}</if>
+            <if test="heartRate != null "> and heartRate = #{heartRate}</if>
+            <if test="respiratoryRate != null "> and respiratoryRate = #{respiratoryRate}</if>
+            <if test="systolicNIBP != null "> and systolicNIBP = #{systolicNIBP}</if>
+            <if test="diastolicNIBP != null "> and diastolicNIBP = #{diastolicNIBP}</if>
+            <if test="meanNIBP != null "> and meanNIBP = #{meanNIBP}</if>
+            <if test="systolicABP != null "> and systolicABP = #{systolicABP}</if>
+            <if test="diastolicABP != null "> and diastolicABP = #{diastolicABP}</if>
+            <if test="meanABP != null "> and meanABP = #{meanABP}</if>
+            <if test="oxygenSaturation != null "> and oxygenSaturation = #{oxygenSaturation}</if>
+            <if test="centralvenouspressureMmhg != null "> and centralVenousPressure_mmHg = #{centralvenouspressureMmhg}</if>
+            <if test="Instructions != null  and Instructions != ''"> and Instructions like concat('%', #{Instructions}, '%')</if>
+        </where>
+    </select>
+    
+    <select id="selectDataVitalsignById" parameterType="Long" resultMap="DataVitalsignResult">
+        <include refid="selectDataVitalsignVo"/>
+        where Id = #{Id}
+    </select>
+
+    <insert id="insertDataVitalsign" parameterType="DataVitalsign" useGeneratedKeys="true" keyProperty="Id">
+        insert into data_vitalsign
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="encounterId != null">encounterId,</if>
+            <if test="hospitalId != null">hospitalId,</if>
+            <if test="chartTime != null">chartTime,</if>
+            <if test="temperature != null">temperature,</if>
+            <if test="heartRate != null">heartRate,</if>
+            <if test="respiratoryRate != null">respiratoryRate,</if>
+            <if test="systolicNIBP != null">systolicNIBP,</if>
+            <if test="diastolicNIBP != null">diastolicNIBP,</if>
+            <if test="meanNIBP != null">meanNIBP,</if>
+            <if test="systolicABP != null">systolicABP,</if>
+            <if test="diastolicABP != null">diastolicABP,</if>
+            <if test="meanABP != null">meanABP,</if>
+            <if test="oxygenSaturation != null">oxygenSaturation,</if>
+            <if test="centralvenouspressureMmhg != null">centralVenousPressure_mmHg,</if>
+            <if test="Instructions != null">Instructions,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="encounterId != null">#{encounterId},</if>
+            <if test="hospitalId != null">#{hospitalId},</if>
+            <if test="chartTime != null">#{chartTime},</if>
+            <if test="temperature != null">#{temperature},</if>
+            <if test="heartRate != null">#{heartRate},</if>
+            <if test="respiratoryRate != null">#{respiratoryRate},</if>
+            <if test="systolicNIBP != null">#{systolicNIBP},</if>
+            <if test="diastolicNIBP != null">#{diastolicNIBP},</if>
+            <if test="meanNIBP != null">#{meanNIBP},</if>
+            <if test="systolicABP != null">#{systolicABP},</if>
+            <if test="diastolicABP != null">#{diastolicABP},</if>
+            <if test="meanABP != null">#{meanABP},</if>
+            <if test="oxygenSaturation != null">#{oxygenSaturation},</if>
+            <if test="centralvenouspressureMmhg != null">#{centralvenouspressureMmhg},</if>
+            <if test="Instructions != null">#{Instructions},</if>
+         </trim>
+    </insert>
+
+    <update id="updateDataVitalsign" parameterType="DataVitalsign">
+        update data_vitalsign
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="encounterId != null">encounterId = #{encounterId},</if>
+            <if test="hospitalId != null">hospitalId = #{hospitalId},</if>
+            <if test="chartTime != null">chartTime = #{chartTime},</if>
+            <if test="temperature != null">temperature = #{temperature},</if>
+            <if test="heartRate != null">heartRate = #{heartRate},</if>
+            <if test="respiratoryRate != null">respiratoryRate = #{respiratoryRate},</if>
+            <if test="systolicNIBP != null">systolicNIBP = #{systolicNIBP},</if>
+            <if test="diastolicNIBP != null">diastolicNIBP = #{diastolicNIBP},</if>
+            <if test="meanNIBP != null">meanNIBP = #{meanNIBP},</if>
+            <if test="systolicABP != null">systolicABP = #{systolicABP},</if>
+            <if test="diastolicABP != null">diastolicABP = #{diastolicABP},</if>
+            <if test="meanABP != null">meanABP = #{meanABP},</if>
+            <if test="oxygenSaturation != null">oxygenSaturation = #{oxygenSaturation},</if>
+            <if test="centralvenouspressureMmhg != null">centralVenousPressure_mmHg = #{centralvenouspressureMmhg},</if>
+            <if test="Instructions != null">Instructions = #{Instructions},</if>
+        </trim>
+        where Id = #{Id}
+    </update>
+
+    <delete id="deleteDataVitalsignById" parameterType="Long">
+        delete from data_vitalsign where Id = #{Id}
+    </delete>
+
+    <delete id="deleteDataVitalsignByIds" parameterType="String">
+        delete from data_vitalsign where Id in 
+        <foreach item="Id" collection="array" open="(" separator="," close=")">
+            #{Id}
+        </foreach>
+    </delete>
+
+    <!-- 根据病例编号查询 -->
+    <select id="selectDataVitalsignByEncounterId" parameterType="Long" resultType="com.kd.system.domain.DataVitalsign">
+        SELECT *
+        FROM data_vitalsign
+        WHERE encounterId = #{encounterId}
+    </select>
+
+</mapper>

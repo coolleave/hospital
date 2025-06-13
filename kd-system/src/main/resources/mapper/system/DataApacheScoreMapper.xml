@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.kd.system.mapper.DataApacheScoreMapper">
+    
+    <resultMap type="DataApacheScore" id="DataApacheScoreResult">
+        <result property="Id"    column="Id"    />
+        <result property="encounterId"    column="encounterId"    />
+        <result property="hospitalId"    column="hospitalId"    />
+        <result property="chartTime"    column="chartTime"    />
+        <result property="apacheiiComputedStatus"    column="APACHEII_computed_status"    />
+        <result property="apacheiiDefaultComputedObservationStatus"    column="APACHEII_default_computed_observation_Status"    />
+        <result property="apacheiiTemperature"    column="APACHEII_temperature"    />
+        <result property="apacheiiAssessmentTime"    column="APACHEII_assessment_time"    />
+        <result property="apacheiiAge"    column="APACHEII_age"    />
+        <result property="apacheiiTotalScore"    column="APACHEII_total_score"    />
+        <result property="Instructions"    column="Instructions"    />
+    </resultMap>
+
+    <sql id="selectDataApacheScoreVo">
+        select Id, encounterId, hospitalId, chartTime, APACHEII_computed_status, APACHEII_default_computed_observation_Status, APACHEII_temperature, APACHEII_assessment_time, APACHEII_age, APACHEII_total_score, Instructions from data_apache_score
+    </sql>
+
+    <select id="selectDataApacheScoreList" parameterType="DataApacheScore" resultMap="DataApacheScoreResult">
+        <include refid="selectDataApacheScoreVo"/>
+        <where>  
+            <if test="encounterId != null "> and encounterId = #{encounterId}</if>
+            <if test="hospitalId != null "> and hospitalId = #{hospitalId}</if>
+            <if test="params.beginChartTime != null and params.beginChartTime != '' and params.endChartTime != null and params.endChartTime != ''"> and chartTime between #{params.beginChartTime} and #{params.endChartTime}</if>
+            <if test="apacheiiComputedStatus != null  and apacheiiComputedStatus != ''"> and APACHEII_computed_status = #{apacheiiComputedStatus}</if>
+            <if test="apacheiiDefaultComputedObservationStatus != null  and apacheiiDefaultComputedObservationStatus != ''"> and APACHEII_default_computed_observation_Status = #{apacheiiDefaultComputedObservationStatus}</if>
+            <if test="apacheiiTemperature != null "> and APACHEII_temperature = #{apacheiiTemperature}</if>
+            <if test="apacheiiAssessmentTime != null "> and APACHEII_assessment_time = #{apacheiiAssessmentTime}</if>
+            <if test="apacheiiAge != null "> and APACHEII_age = #{apacheiiAge}</if>
+            <if test="apacheiiTotalScore != null "> and APACHEII_total_score = #{apacheiiTotalScore}</if>
+            <if test="Instructions != null  and Instructions != ''"> and Instructions like concat('%', #{Instructions}, '%')</if>
+        </where>
+    </select>
+    
+    <select id="selectDataApacheScoreById" parameterType="Long" resultMap="DataApacheScoreResult">
+        <include refid="selectDataApacheScoreVo"/>
+        where Id = #{Id}
+    </select>
+
+    <insert id="insertDataApacheScore" parameterType="DataApacheScore" useGeneratedKeys="true" keyProperty="Id">
+        insert into data_apache_score
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="encounterId != null">encounterId,</if>
+            <if test="hospitalId != null">hospitalId,</if>
+            <if test="chartTime != null">chartTime,</if>
+            <if test="apacheiiComputedStatus != null">APACHEII_computed_status,</if>
+            <if test="apacheiiDefaultComputedObservationStatus != null">APACHEII_default_computed_observation_Status,</if>
+            <if test="apacheiiTemperature != null">APACHEII_temperature,</if>
+            <if test="apacheiiAssessmentTime != null">APACHEII_assessment_time,</if>
+            <if test="apacheiiAge != null">APACHEII_age,</if>
+            <if test="apacheiiTotalScore != null">APACHEII_total_score,</if>
+            <if test="Instructions != null">Instructions,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="encounterId != null">#{encounterId},</if>
+            <if test="hospitalId != null">#{hospitalId},</if>
+            <if test="chartTime != null">#{chartTime},</if>
+            <if test="apacheiiComputedStatus != null">#{apacheiiComputedStatus},</if>
+            <if test="apacheiiDefaultComputedObservationStatus != null">#{apacheiiDefaultComputedObservationStatus},</if>
+            <if test="apacheiiTemperature != null">#{apacheiiTemperature},</if>
+            <if test="apacheiiAssessmentTime != null">#{apacheiiAssessmentTime},</if>
+            <if test="apacheiiAge != null">#{apacheiiAge},</if>
+            <if test="apacheiiTotalScore != null">#{apacheiiTotalScore},</if>
+            <if test="Instructions != null">#{Instructions},</if>
+         </trim>
+    </insert>
+
+    <update id="updateDataApacheScore" parameterType="DataApacheScore">
+        update data_apache_score
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="encounterId != null">encounterId = #{encounterId},</if>
+            <if test="hospitalId != null">hospitalId = #{hospitalId},</if>
+            <if test="chartTime != null">chartTime = #{chartTime},</if>
+            <if test="apacheiiComputedStatus != null">APACHEII_computed_status = #{apacheiiComputedStatus},</if>
+            <if test="apacheiiDefaultComputedObservationStatus != null">APACHEII_default_computed_observation_Status = #{apacheiiDefaultComputedObservationStatus},</if>
+            <if test="apacheiiTemperature != null">APACHEII_temperature = #{apacheiiTemperature},</if>
+            <if test="apacheiiAssessmentTime != null">APACHEII_assessment_time = #{apacheiiAssessmentTime},</if>
+            <if test="apacheiiAge != null">APACHEII_age = #{apacheiiAge},</if>
+            <if test="apacheiiTotalScore != null">APACHEII_total_score = #{apacheiiTotalScore},</if>
+            <if test="Instructions != null">Instructions = #{Instructions},</if>
+        </trim>
+        where Id = #{Id}
+    </update>
+
+    <delete id="deleteDataApacheScoreById" parameterType="Long">
+        delete from data_apache_score where Id = #{Id}
+    </delete>
+
+    <delete id="deleteDataApacheScoreByIds" parameterType="String">
+        delete from data_apache_score where Id in 
+        <foreach item="Id" collection="array" open="(" separator="," close=")">
+            #{Id}
+        </foreach>
+    </delete>
+</mapper>

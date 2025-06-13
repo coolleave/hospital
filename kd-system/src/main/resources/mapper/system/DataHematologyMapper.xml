@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.kd.system.mapper.DataHematologyMapper">
+    
+    <resultMap type="DataHematology" id="DataHematologyResult">
+        <result property="Id"    column="Id"    />
+        <result property="encounterId"    column="encounterId"    />
+        <result property="hospitalId"    column="hospitalId"    />
+        <result property="chartTime"    column="chartTime"    />
+        <result property="redBloodCellCount"    column="redBloodCellCount"    />
+        <result property="rdwSD"    column="rdwSD"    />
+        <result property="rdwCV"    column="rdwCV"    />
+        <result property="hct"    column="hct"    />
+        <result property="hemoglobin"    column="hemoglobin"    />
+        <result property="mchc"    column="mchc"    />
+        <result property="mch"    column="mch"    />
+        <result property="mcv"    column="mcv"    />
+        <result property="whiteBloodCellCount"    column="whiteBloodCellCount"    />
+        <result property="neutrophilCount"    column="neutrophilCount"    />
+        <result property="lymphocyteCount"    column="lymphocyteCount"    />
+        <result property="eosinophilCount"    column="eosinophilCount"    />
+        <result property="basophilCount"    column="basophilCount"    />
+        <result property="monocyteCount"    column="monocyteCount"    />
+        <result property="immatureGranulocyteCount"    column="immatureGranulocyteCount"    />
+        <result property="plateletCount"    column="plateletCount"    />
+        <result property="plateletcrit"    column="plateletcrit"    />
+        <result property="meanPlateletVolume"    column="meanPlateletVolume"    />
+        <result property="plateletDistributionWidth"    column="plateletDistributionWidth"    />
+        <result property="Instructions"    column="Instructions"    />
+    </resultMap>
+
+    <sql id="selectDataHematologyVo">
+        select Id, encounterId, hospitalId, chartTime, redBloodCellCount, rdwSD, rdwCV, hct, hemoglobin, mchc, mch, mcv, whiteBloodCellCount, neutrophilCount, lymphocyteCount, eosinophilCount, basophilCount, monocyteCount, immatureGranulocyteCount, plateletCount, plateletcrit, meanPlateletVolume, plateletDistributionWidth, Instructions from data_hematology
+    </sql>
+
+    <select id="selectDataHematologyList" parameterType="DataHematology" resultMap="DataHematologyResult">
+        <include refid="selectDataHematologyVo"/>
+        <where>  
+            <if test="encounterId != null "> and encounterId = #{encounterId}</if>
+            <if test="hospitalId != null "> and hospitalId = #{hospitalId}</if>
+            <if test="params.beginChartTime != null and params.beginChartTime != '' and params.endChartTime != null and params.endChartTime != ''"> and chartTime between #{params.beginChartTime} and #{params.endChartTime}</if>
+            <if test="redBloodCellCount != null "> and redBloodCellCount = #{redBloodCellCount}</if>
+            <if test="rdwSD != null "> and rdwSD = #{rdwSD}</if>
+            <if test="rdwCV != null "> and rdwCV = #{rdwCV}</if>
+            <if test="hct != null "> and hct = #{hct}</if>
+            <if test="hemoglobin != null "> and hemoglobin = #{hemoglobin}</if>
+            <if test="mchc != null "> and mchc = #{mchc}</if>
+            <if test="mch != null "> and mch = #{mch}</if>
+            <if test="mcv != null "> and mcv = #{mcv}</if>
+            <if test="whiteBloodCellCount != null "> and whiteBloodCellCount = #{whiteBloodCellCount}</if>
+            <if test="neutrophilCount != null "> and neutrophilCount = #{neutrophilCount}</if>
+            <if test="lymphocyteCount != null "> and lymphocyteCount = #{lymphocyteCount}</if>
+            <if test="eosinophilCount != null "> and eosinophilCount = #{eosinophilCount}</if>
+            <if test="basophilCount != null "> and basophilCount = #{basophilCount}</if>
+            <if test="monocyteCount != null "> and monocyteCount = #{monocyteCount}</if>
+            <if test="immatureGranulocyteCount != null "> and immatureGranulocyteCount = #{immatureGranulocyteCount}</if>
+            <if test="plateletCount != null "> and plateletCount = #{plateletCount}</if>
+            <if test="plateletcrit != null "> and plateletcrit = #{plateletcrit}</if>
+            <if test="meanPlateletVolume != null "> and meanPlateletVolume = #{meanPlateletVolume}</if>
+            <if test="plateletDistributionWidth != null "> and plateletDistributionWidth = #{plateletDistributionWidth}</if>
+            <if test="Instructions != null  and Instructions != ''"> and Instructions like concat('%', #{Instructions}, '%')</if>
+        </where>
+    </select>
+    
+    <select id="selectDataHematologyById" parameterType="Long" resultMap="DataHematologyResult">
+        <include refid="selectDataHematologyVo"/>
+        where Id = #{Id}
+    </select>
+
+    <insert id="insertDataHematology" parameterType="DataHematology" useGeneratedKeys="true" keyProperty="Id">
+        insert into data_hematology
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="encounterId != null">encounterId,</if>
+            <if test="hospitalId != null">hospitalId,</if>
+            <if test="chartTime != null">chartTime,</if>
+            <if test="redBloodCellCount != null">redBloodCellCount,</if>
+            <if test="rdwSD != null">rdwSD,</if>
+            <if test="rdwCV != null">rdwCV,</if>
+            <if test="hct != null">hct,</if>
+            <if test="hemoglobin != null">hemoglobin,</if>
+            <if test="mchc != null">mchc,</if>
+            <if test="mch != null">mch,</if>
+            <if test="mcv != null">mcv,</if>
+            <if test="whiteBloodCellCount != null">whiteBloodCellCount,</if>
+            <if test="neutrophilCount != null">neutrophilCount,</if>
+            <if test="lymphocyteCount != null">lymphocyteCount,</if>
+            <if test="eosinophilCount != null">eosinophilCount,</if>
+            <if test="basophilCount != null">basophilCount,</if>
+            <if test="monocyteCount != null">monocyteCount,</if>
+            <if test="immatureGranulocyteCount != null">immatureGranulocyteCount,</if>
+            <if test="plateletCount != null">plateletCount,</if>
+            <if test="plateletcrit != null">plateletcrit,</if>
+            <if test="meanPlateletVolume != null">meanPlateletVolume,</if>
+            <if test="plateletDistributionWidth != null">plateletDistributionWidth,</if>
+            <if test="Instructions != null">Instructions,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="encounterId != null">#{encounterId},</if>
+            <if test="hospitalId != null">#{hospitalId},</if>
+            <if test="chartTime != null">#{chartTime},</if>
+            <if test="redBloodCellCount != null">#{redBloodCellCount},</if>
+            <if test="rdwSD != null">#{rdwSD},</if>
+            <if test="rdwCV != null">#{rdwCV},</if>
+            <if test="hct != null">#{hct},</if>
+            <if test="hemoglobin != null">#{hemoglobin},</if>
+            <if test="mchc != null">#{mchc},</if>
+            <if test="mch != null">#{mch},</if>
+            <if test="mcv != null">#{mcv},</if>
+            <if test="whiteBloodCellCount != null">#{whiteBloodCellCount},</if>
+            <if test="neutrophilCount != null">#{neutrophilCount},</if>
+            <if test="lymphocyteCount != null">#{lymphocyteCount},</if>
+            <if test="eosinophilCount != null">#{eosinophilCount},</if>
+            <if test="basophilCount != null">#{basophilCount},</if>
+            <if test="monocyteCount != null">#{monocyteCount},</if>
+            <if test="immatureGranulocyteCount != null">#{immatureGranulocyteCount},</if>
+            <if test="plateletCount != null">#{plateletCount},</if>
+            <if test="plateletcrit != null">#{plateletcrit},</if>
+            <if test="meanPlateletVolume != null">#{meanPlateletVolume},</if>
+            <if test="plateletDistributionWidth != null">#{plateletDistributionWidth},</if>
+            <if test="Instructions != null">#{Instructions},</if>
+         </trim>
+    </insert>
+
+    <update id="updateDataHematology" parameterType="DataHematology">
+        update data_hematology
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="encounterId != null">encounterId = #{encounterId},</if>
+            <if test="hospitalId != null">hospitalId = #{hospitalId},</if>
+            <if test="chartTime != null">chartTime = #{chartTime},</if>
+            <if test="redBloodCellCount != null">redBloodCellCount = #{redBloodCellCount},</if>
+            <if test="rdwSD != null">rdwSD = #{rdwSD},</if>
+            <if test="rdwCV != null">rdwCV = #{rdwCV},</if>
+            <if test="hct != null">hct = #{hct},</if>
+            <if test="hemoglobin != null">hemoglobin = #{hemoglobin},</if>
+            <if test="mchc != null">mchc = #{mchc},</if>
+            <if test="mch != null">mch = #{mch},</if>
+            <if test="mcv != null">mcv = #{mcv},</if>
+            <if test="whiteBloodCellCount != null">whiteBloodCellCount = #{whiteBloodCellCount},</if>
+            <if test="neutrophilCount != null">neutrophilCount = #{neutrophilCount},</if>
+            <if test="lymphocyteCount != null">lymphocyteCount = #{lymphocyteCount},</if>
+            <if test="eosinophilCount != null">eosinophilCount = #{eosinophilCount},</if>
+            <if test="basophilCount != null">basophilCount = #{basophilCount},</if>
+            <if test="monocyteCount != null">monocyteCount = #{monocyteCount},</if>
+            <if test="immatureGranulocyteCount != null">immatureGranulocyteCount = #{immatureGranulocyteCount},</if>
+            <if test="plateletCount != null">plateletCount = #{plateletCount},</if>
+            <if test="plateletcrit != null">plateletcrit = #{plateletcrit},</if>
+            <if test="meanPlateletVolume != null">meanPlateletVolume = #{meanPlateletVolume},</if>
+            <if test="plateletDistributionWidth != null">plateletDistributionWidth = #{plateletDistributionWidth},</if>
+            <if test="Instructions != null">Instructions = #{Instructions},</if>
+        </trim>
+        where Id = #{Id}
+    </update>
+
+    <delete id="deleteDataHematologyById" parameterType="Long">
+        delete from data_hematology where Id = #{Id}
+    </delete>
+
+    <delete id="deleteDataHematologyByIds" parameterType="String">
+        delete from data_hematology where Id in 
+        <foreach item="Id" collection="array" open="(" separator="," close=")">
+            #{Id}
+        </foreach>
+    </delete>
+
+    <!-- 根据病例编号查询 -->
+    <select id="selectDataHematologyByEncounterId" parameterType="Long" resultType="com.kd.system.domain.DataHematology">
+        SELECT *
+        FROM data_hematology
+        WHERE encounterId = #{encounterId}
+    </select>
+
+</mapper>

@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.kd.system.mapper.DataEcmoMapper">
+    
+    <resultMap type="DataEcmo" id="DataEcmoResult">
+        <result property="Id"    column="Id"    />
+        <result property="encounterId"    column="encounterId"    />
+        <result property="hospitalId"    column="hospitalId"    />
+        <result property="chartTime"    column="chartTime"    />
+        <result property="ecmoMeasuredWaterTemperature"    column="ECMO_measured_water_temperature"    />
+        <result property="ecmoPredictedWaterTemperature"    column="ECMO_predicted_water_temperature"    />
+        <result property="ecmoTransmembranePressureMmhg"    column="ECMO_transmembrane_pressure_mmHg"    />
+        <result property="filterPrePressureMmhg"    column="filter_pre_pressure_mmHg"    />
+        <result property="ecmoBloodFlowRate"    column="ECMO_blood_flow_rate"    />
+        <result property="ecmoGasFlowLMin"    column="ECMO_gas_flow_L_min"    />
+        <result property="ecmoStartTime"    column="ECMO_start_time"    />
+        <result property="ecmoEndTime"    column="ECMO_end_time"    />
+        <result property="ecmosao2Percent"    column="ECMOSaO2_percent"    />
+        <result property="ecmoMembranePostPressureMmhg"    column="ECMO_membrane_post_pressure_mmHg"    />
+        <result property="ecmoDiversionMode"    column="ECMO_diversion_mode"    />
+        <result property="ecmoMembranePrePressureMmhg"    column="ECMO_membrane_pre_pressure_mmHg"    />
+        <result property="gasFlowL"    column="gas_flow_L"    />
+        <result property="ecmoPumpSpeed"    column="ECMO_pump_speed"    />
+        <result property="singlePumpSpeedCalciumGlubionate"    column="single_pump_speed_calcium_glubionate"    />
+        <result property="singlePumpSpeedCalciumChloride"    column="single_pump_speed_calcium_chloride"    />
+        <result property="singlePumpSpeedSodiumCitrate"    column="single_pump_speed_sodium_citrate"    />
+        <result property="singlePumpSpeedHeparin"    column="single_pump_speed_heparin"    />
+        <result property="Instructions"    column="Instructions"    />
+    </resultMap>
+
+    <sql id="selectDataEcmoVo">
+        select Id, encounterId, hospitalId, chartTime, ECMO_measured_water_temperature, ECMO_predicted_water_temperature, ECMO_transmembrane_pressure_mmHg, filter_pre_pressure_mmHg, ECMO_blood_flow_rate, ECMO_gas_flow_L_min, ECMO_start_time, ECMO_end_time, ECMOSaO2_percent, ECMO_membrane_post_pressure_mmHg, ECMO_diversion_mode, ECMO_membrane_pre_pressure_mmHg, gas_flow_L, ECMO_pump_speed, single_pump_speed_calcium_glubionate, single_pump_speed_calcium_chloride, single_pump_speed_sodium_citrate, single_pump_speed_heparin, Instructions from data_ecmo
+    </sql>
+
+    <select id="selectDataEcmoList" parameterType="DataEcmo" resultMap="DataEcmoResult">
+        <include refid="selectDataEcmoVo"/>
+        <where>  
+            <if test="encounterId != null "> and encounterId = #{encounterId}</if>
+            <if test="hospitalId != null "> and hospitalId = #{hospitalId}</if>
+            <if test="params.beginChartTime != null and params.beginChartTime != '' and params.endChartTime != null and params.endChartTime != ''"> and chartTime between #{params.beginChartTime} and #{params.endChartTime}</if>
+            <if test="ecmoMeasuredWaterTemperature != null "> and ECMO_measured_water_temperature = #{ecmoMeasuredWaterTemperature}</if>
+            <if test="ecmoPredictedWaterTemperature != null "> and ECMO_predicted_water_temperature = #{ecmoPredictedWaterTemperature}</if>
+            <if test="ecmoTransmembranePressureMmhg != null "> and ECMO_transmembrane_pressure_mmHg = #{ecmoTransmembranePressureMmhg}</if>
+            <if test="filterPrePressureMmhg != null "> and filter_pre_pressure_mmHg = #{filterPrePressureMmhg}</if>
+            <if test="ecmoBloodFlowRate != null "> and ECMO_blood_flow_rate = #{ecmoBloodFlowRate}</if>
+            <if test="ecmoGasFlowLMin != null "> and ECMO_gas_flow_L_min = #{ecmoGasFlowLMin}</if>
+            <if test="ecmoStartTime != null "> and ECMO_start_time = #{ecmoStartTime}</if>
+            <if test="ecmoEndTime != null "> and ECMO_end_time = #{ecmoEndTime}</if>
+            <if test="ecmosao2Percent != null "> and ECMOSaO2_percent = #{ecmosao2Percent}</if>
+            <if test="ecmoMembranePostPressureMmhg != null "> and ECMO_membrane_post_pressure_mmHg = #{ecmoMembranePostPressureMmhg}</if>
+            <if test="ecmoDiversionMode != null  and ecmoDiversionMode != ''"> and ECMO_diversion_mode = #{ecmoDiversionMode}</if>
+            <if test="ecmoMembranePrePressureMmhg != null "> and ECMO_membrane_pre_pressure_mmHg = #{ecmoMembranePrePressureMmhg}</if>
+            <if test="gasFlowL != null "> and gas_flow_L = #{gasFlowL}</if>
+            <if test="ecmoPumpSpeed != null "> and ECMO_pump_speed = #{ecmoPumpSpeed}</if>
+            <if test="singlePumpSpeedCalciumGlubionate != null "> and single_pump_speed_calcium_glubionate = #{singlePumpSpeedCalciumGlubionate}</if>
+            <if test="singlePumpSpeedCalciumChloride != null "> and single_pump_speed_calcium_chloride = #{singlePumpSpeedCalciumChloride}</if>
+            <if test="singlePumpSpeedSodiumCitrate != null "> and single_pump_speed_sodium_citrate = #{singlePumpSpeedSodiumCitrate}</if>
+            <if test="singlePumpSpeedHeparin != null "> and single_pump_speed_heparin = #{singlePumpSpeedHeparin}</if>
+            <if test="Instructions != null  and Instructions != ''"> and Instructions like concat('%', #{Instructions}, '%')</if>
+        </where>
+    </select>
+    
+    <select id="selectDataEcmoById" parameterType="Long" resultMap="DataEcmoResult">
+        <include refid="selectDataEcmoVo"/>
+        where Id = #{Id}
+    </select>
+
+    <insert id="insertDataEcmo" parameterType="DataEcmo" useGeneratedKeys="true" keyProperty="Id">
+        insert into data_ecmo
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="encounterId != null">encounterId,</if>
+            <if test="hospitalId != null">hospitalId,</if>
+            <if test="chartTime != null">chartTime,</if>
+            <if test="ecmoMeasuredWaterTemperature != null">ECMO_measured_water_temperature,</if>
+            <if test="ecmoPredictedWaterTemperature != null">ECMO_predicted_water_temperature,</if>
+            <if test="ecmoTransmembranePressureMmhg != null">ECMO_transmembrane_pressure_mmHg,</if>
+            <if test="filterPrePressureMmhg != null">filter_pre_pressure_mmHg,</if>
+            <if test="ecmoBloodFlowRate != null">ECMO_blood_flow_rate,</if>
+            <if test="ecmoGasFlowLMin != null">ECMO_gas_flow_L_min,</if>
+            <if test="ecmoStartTime != null">ECMO_start_time,</if>
+            <if test="ecmoEndTime != null">ECMO_end_time,</if>
+            <if test="ecmosao2Percent != null">ECMOSaO2_percent,</if>
+            <if test="ecmoMembranePostPressureMmhg != null">ECMO_membrane_post_pressure_mmHg,</if>
+            <if test="ecmoDiversionMode != null">ECMO_diversion_mode,</if>
+            <if test="ecmoMembranePrePressureMmhg != null">ECMO_membrane_pre_pressure_mmHg,</if>
+            <if test="gasFlowL != null">gas_flow_L,</if>
+            <if test="ecmoPumpSpeed != null">ECMO_pump_speed,</if>
+            <if test="singlePumpSpeedCalciumGlubionate != null">single_pump_speed_calcium_glubionate,</if>
+            <if test="singlePumpSpeedCalciumChloride != null">single_pump_speed_calcium_chloride,</if>
+            <if test="singlePumpSpeedSodiumCitrate != null">single_pump_speed_sodium_citrate,</if>
+            <if test="singlePumpSpeedHeparin != null">single_pump_speed_heparin,</if>
+            <if test="Instructions != null">Instructions,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="encounterId != null">#{encounterId},</if>
+            <if test="hospitalId != null">#{hospitalId},</if>
+            <if test="chartTime != null">#{chartTime},</if>
+            <if test="ecmoMeasuredWaterTemperature != null">#{ecmoMeasuredWaterTemperature},</if>
+            <if test="ecmoPredictedWaterTemperature != null">#{ecmoPredictedWaterTemperature},</if>
+            <if test="ecmoTransmembranePressureMmhg != null">#{ecmoTransmembranePressureMmhg},</if>
+            <if test="filterPrePressureMmhg != null">#{filterPrePressureMmhg},</if>
+            <if test="ecmoBloodFlowRate != null">#{ecmoBloodFlowRate},</if>
+            <if test="ecmoGasFlowLMin != null">#{ecmoGasFlowLMin},</if>
+            <if test="ecmoStartTime != null">#{ecmoStartTime},</if>
+            <if test="ecmoEndTime != null">#{ecmoEndTime},</if>
+            <if test="ecmosao2Percent != null">#{ecmosao2Percent},</if>
+            <if test="ecmoMembranePostPressureMmhg != null">#{ecmoMembranePostPressureMmhg},</if>
+            <if test="ecmoDiversionMode != null">#{ecmoDiversionMode},</if>
+            <if test="ecmoMembranePrePressureMmhg != null">#{ecmoMembranePrePressureMmhg},</if>
+            <if test="gasFlowL != null">#{gasFlowL},</if>
+            <if test="ecmoPumpSpeed != null">#{ecmoPumpSpeed},</if>
+            <if test="singlePumpSpeedCalciumGlubionate != null">#{singlePumpSpeedCalciumGlubionate},</if>
+            <if test="singlePumpSpeedCalciumChloride != null">#{singlePumpSpeedCalciumChloride},</if>
+            <if test="singlePumpSpeedSodiumCitrate != null">#{singlePumpSpeedSodiumCitrate},</if>
+            <if test="singlePumpSpeedHeparin != null">#{singlePumpSpeedHeparin},</if>
+            <if test="Instructions != null">#{Instructions},</if>
+         </trim>
+    </insert>
+
+    <update id="updateDataEcmo" parameterType="DataEcmo">
+        update data_ecmo
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="encounterId != null">encounterId = #{encounterId},</if>
+            <if test="hospitalId != null">hospitalId = #{hospitalId},</if>
+            <if test="chartTime != null">chartTime = #{chartTime},</if>
+            <if test="ecmoMeasuredWaterTemperature != null">ECMO_measured_water_temperature = #{ecmoMeasuredWaterTemperature},</if>
+            <if test="ecmoPredictedWaterTemperature != null">ECMO_predicted_water_temperature = #{ecmoPredictedWaterTemperature},</if>
+            <if test="ecmoTransmembranePressureMmhg != null">ECMO_transmembrane_pressure_mmHg = #{ecmoTransmembranePressureMmhg},</if>
+            <if test="filterPrePressureMmhg != null">filter_pre_pressure_mmHg = #{filterPrePressureMmhg},</if>
+            <if test="ecmoBloodFlowRate != null">ECMO_blood_flow_rate = #{ecmoBloodFlowRate},</if>
+            <if test="ecmoGasFlowLMin != null">ECMO_gas_flow_L_min = #{ecmoGasFlowLMin},</if>
+            <if test="ecmoStartTime != null">ECMO_start_time = #{ecmoStartTime},</if>
+            <if test="ecmoEndTime != null">ECMO_end_time = #{ecmoEndTime},</if>
+            <if test="ecmosao2Percent != null">ECMOSaO2_percent = #{ecmosao2Percent},</if>
+            <if test="ecmoMembranePostPressureMmhg != null">ECMO_membrane_post_pressure_mmHg = #{ecmoMembranePostPressureMmhg},</if>
+            <if test="ecmoDiversionMode != null">ECMO_diversion_mode = #{ecmoDiversionMode},</if>
+            <if test="ecmoMembranePrePressureMmhg != null">ECMO_membrane_pre_pressure_mmHg = #{ecmoMembranePrePressureMmhg},</if>
+            <if test="gasFlowL != null">gas_flow_L = #{gasFlowL},</if>
+            <if test="ecmoPumpSpeed != null">ECMO_pump_speed = #{ecmoPumpSpeed},</if>
+            <if test="singlePumpSpeedCalciumGlubionate != null">single_pump_speed_calcium_glubionate = #{singlePumpSpeedCalciumGlubionate},</if>
+            <if test="singlePumpSpeedCalciumChloride != null">single_pump_speed_calcium_chloride = #{singlePumpSpeedCalciumChloride},</if>
+            <if test="singlePumpSpeedSodiumCitrate != null">single_pump_speed_sodium_citrate = #{singlePumpSpeedSodiumCitrate},</if>
+            <if test="singlePumpSpeedHeparin != null">single_pump_speed_heparin = #{singlePumpSpeedHeparin},</if>
+            <if test="Instructions != null">Instructions = #{Instructions},</if>
+        </trim>
+        where Id = #{Id}
+    </update>
+
+    <delete id="deleteDataEcmoById" parameterType="Long">
+        delete from data_ecmo where Id = #{Id}
+    </delete>
+
+    <delete id="deleteDataEcmoByIds" parameterType="String">
+        delete from data_ecmo where Id in 
+        <foreach item="Id" collection="array" open="(" separator="," close=")">
+            #{Id}
+        </foreach>
+    </delete>
+
+
+    <!-- 根据病例编号查询 -->
+    <select id="selectDataEcmoByEncounterId" parameterType="Long" resultType="com.kd.system.domain.DataEcmo">
+        SELECT *
+        FROM data_ecmo
+        WHERE encounterId = #{encounterId}
+    </select>
+</mapper>
